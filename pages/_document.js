@@ -28,6 +28,14 @@ class MyDocument extends Document {
               `,
             }}
           />
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-LJ2VF2K6WK"></Script>
+      <Script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LJ2VF2K6WK');
+      </Script>
         </Head>
         <body>
           {/* Google Tag Manager (noscript) */}
