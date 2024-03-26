@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
+import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import Pricing from '../components/Pricing'
@@ -7,6 +8,7 @@ import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 
 import imageTwo from '../assets/cleaningImgTwo.jpg'
+import BotaoWhatsApp from '@/components/BotaoWhatsApp'
 
 
 const navigation = [
@@ -102,6 +104,13 @@ export default function Example() {
     <div className="bg-white">
       <main className="isolate">
         {/* Content section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="mx-auto -mt-12 py-32 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8"
+          id='sobre'
+        >
         <div className="mx-auto -mt-12 py-32 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8" id='sobre'>
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Simples, Confiável, Limpo.</h2>
@@ -130,16 +139,20 @@ export default function Example() {
             </div>
           </div>
         </div>
+        </motion.div>
 
         {/* Image section */}
         <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
-          <img
-            src={imageTwo.src}
-            alt="Limpeza disponivel"
-            className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
-          />
+        <motion.img
+        src={imageTwo.src}
+        alt="Limpeza disponivel"
+        className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
         </div>
-
+        <BotaoWhatsApp/>
         <Pricing/>
 
         {/* Values section */}
