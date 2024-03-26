@@ -37,10 +37,10 @@ export default function Example() {
                         alt="Mary Cleans"
                     />
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Limpeza profissional feita para sua necessidade.
+                Muito obrigado pelo seu interesse. Entraremos em contato em breve.
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                Somos uma equipe de profissionais de limpeza to-go. Você pede e nós entregamos.
+Muito obrigado pelo seu interesse.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <a
