@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Pagina from "./Pagina";
-import FormOrcamento from "./FormOrcamento";
+import FormProposta from "./FormProposta";
 import TextoComLinks, { semLinks } from "./blog/TextoComLinks";
 import { SITE, negocioJsonLd } from "./Seo";
 import { EMPRESA, SERVICOS, WHATSAPP } from "../lib/negocio";
@@ -9,6 +9,37 @@ import { SEO_DATA, GRUPOS_SEO } from "../lib/seo-indice";
 // Página de entrada por serviço e por zona. O conteúdo vem de lib/seo-paginas.js.
 // Ordem pensada para quem chega da pesquisa: resposta curta no topo, depois o que é próprio
 // do local, depois perguntas, depois o formulário.
+
+// Bloco para empresas. Só entra o que está no CONTEXTO da frente ou que é processo.
+// "confirmar" aparece como marca visível na pré-visualização e sai antes de publicar.
+const B2B = [
+  {
+    t: "Contrato de prestação de serviço",
+    d: "Preço por limpeza fixado para cada imóvel durante o período do contrato. Um imóvel novo entra com o preço da sua tipologia.",
+    confirmar: "duração do contrato e se a faturação é mensal",
+  },
+  {
+    t: "Relatório com fotografias",
+    d: "Depois de cada limpeza segue o estado de entrega de cada divisão e o que encontrámos avariado ou em falta.",
+  },
+  {
+    t: "Reposição de consumíveis",
+    d: "Papel, sabão, gel de duche e o que ficar definido para cada imóvel. O produto é cobrado a custo.",
+  },
+  {
+    t: "Horário de check-out",
+    d: "A hora de saída e de entrada de cada imóvel fica escrita, e as rotações são marcadas a contar com ela.",
+  },
+  {
+    t: "Fatura",
+    d: "O serviço é faturado à empresa, como prestação de serviço, sem encargos de pessoal para o cliente.",
+    confirmar: "regime de IVA e dados fiscais",
+  },
+  {
+    t: "O que fica de fora",
+    d: "Lavagem e engomadoria de roupa de cama e toalhas. Trocamos a roupa e deixamos a usada separada para a lavandaria do cliente.",
+  },
+];
 
 const HUB = { slug: "limpeza-alojamento-local-lisboa", rotulo: "Alojamento local em Lisboa" };
 
@@ -136,8 +167,8 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
             {pagina.resposta}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#orcamento" className="botao">
-              Pedir orçamento
+            <a href="#proposta" className="botao">
+              Pedir proposta
             </a>
             <a href={wa} target="_blank" rel="noreferrer noopener" className="botao-secundario">
               WhatsApp {EMPRESA.telefone}
@@ -220,21 +251,41 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
         </div>
       </section>
 
-      <section id="orcamento" className="scroll-mt-6">
+      <section className="border-b border-tinta-200">
         <div className="secao secao-espaco">
-          <h2 className="etiqueta-secao">Orçamento</h2>
+          <h2 className="etiqueta-secao">Para empresas</h2>
           <p className="mt-3 max-w-leitura text-titulo-3 text-tinta-900 sm:text-titulo-2">
-            Diga-nos a tipologia e a zona.
+            Gestoras de alojamento local e imobiliárias.
+          </p>
+          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {B2B.map((b) => (
+              <li key={b.t} className="cartao">
+                <h3 className="text-base font-semibold text-tinta-900">{b.t}</h3>
+                <p className="mt-2 text-sm leading-6 text-tinta-600">{b.d}</p>
+                {b.confirmar ? (
+                  <p className="mt-3 inline-block rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-900">
+                    [confirmar] {b.confirmar}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="proposta" className="scroll-mt-6">
+        <div className="secao secao-espaco">
+          <h2 className="etiqueta-secao">Proposta</h2>
+          <p className="mt-3 max-w-leitura text-titulo-3 text-tinta-900 sm:text-titulo-2">
+            Cinco campos e respondemos por escrito.
           </p>
           <p className="mt-4 max-w-leitura text-tinta-600">
-            Respondemos por escrito, com o que está e o que não está incluído. Também pode
-            escrever para o WhatsApp{" "}
-            <a href={wa} className="font-medium text-marca-700 underline underline-offset-2">
-              {EMPRESA.telefone}
-            </a>
-            .
+            A proposta diz o preço por imóvel, o que está incluído e o que fica de fora.
           </p>
-          <FormOrcamento servicoInicial={pagina.servicoForm || undefined} compacto />
+          <FormProposta
+            zonaInicial={pagina.grupo === "bairro" ? pagina.rotulo : pagina.local}
+            servico={pagina.servicoTipo}
+          />
         </div>
       </section>
 
