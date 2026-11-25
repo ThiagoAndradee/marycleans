@@ -1,58 +1,20 @@
 import Link from "next/link";
-import Image from "next/image";
 import Pagina from "../components/Pagina";
 import PorQueNos from "../components/PorQueNos";
 import FormOrcamento from "../components/FormOrcamento";
 import FAQ from "../components/FAQ";
 import { VERTICAIS, SERVICOS, CONCELHOS } from "../lib/negocio";
-import imagemHero from "../assets/cleaningImgFour.jpg";
+import HeroV2 from "../components/HeroV2";
+import AntesDepois from "../components/AntesDepois";
 
 export default function Home() {
   return (
     <Pagina
-      descricao="Serviços de limpeza para alojamento local, mediação imobiliária e habitação, em Sintra, Lisboa, Cascais, Oeiras e Amadora. Preço fechado por imóvel e relatório fotográfico em cada limpeza."
+      descricao="Serviços de limpeza para alojamento local, mediação imobiliária e habitação, em Lisboa, Sintra, Cascais, Oeiras e Amadora. Preço fechado por imóvel e relatório fotográfico em cada limpeza."
       caminho="/"
     >
-      {/* Abertura */}
-      <section className="border-b border-tinta-200">
-        <div className="secao grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="etiqueta-secao">Sintra e Lisboa</p>
-            <h1 className="mt-4 text-titulo-1">
-              Limpeza profissional, com preço fechado por imóvel.
-            </h1>
-            <p className="prosa mt-6">
-              <span className="text-entrada">
-                Trabalhamos com quem tem limpeza a acontecer todas as semanas: alojamento
-                local, mediação imobiliária e habitação. Sempre a mesma equipa, com relatório
-                fotográfico em cada visita.
-              </span>
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contacto" className="botao">
-                Pedir orçamento
-              </Link>
-              <Link href="/servicos" className="botao-secundario">
-                Ver serviços
-              </Link>
-            </div>
-            <p className="mt-6 text-sm text-tinta-500">
-              Orçamento por escrito em 24 horas. Sem visita obrigatória para orçamentar.
-            </p>
-          </div>
-
-          <div className="relative aspect-[4/3] overflow-hidden rounded border border-tinta-200">
-            <Image
-              src={imagemHero}
-              alt="Interior de habitação após serviço de limpeza"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-      </section>
+      <HeroV2 />
+      <AntesDepois />
 
       {/* As três verticais: a primeira decisão que a página pede */}
       <section className="secao secao-espaco">
@@ -116,7 +78,7 @@ export default function Home() {
         <div className="secao secao-espaco">
           <h2 className="etiqueta-secao">Área de serviço</h2>
           <p className="mt-3 max-w-leitura text-titulo-2">
-            Base em Sintra, com deslocação a Lisboa e à linha.
+            Lisboa em primeiro lugar, e também Sintra, Cascais e a linha.
           </p>
           <ul className="mt-8 flex flex-wrap gap-3">
             {CONCELHOS.map((c) => (
