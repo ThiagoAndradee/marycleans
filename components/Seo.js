@@ -6,7 +6,7 @@ const SITE = "https://www.marycleans.pt"; // PENDENTE MC-Q10: domínio definitiv
 export default function Seo({ titulo, descricao, caminho = "/", jsonLd }) {
   const tituloCompleto = titulo
     ? `${titulo} | ${EMPRESA.nome}`
-    : `${EMPRESA.nome} | Serviços de limpeza em Sintra e Lisboa`;
+    : `${EMPRESA.nome} | Serviços de limpeza em Lisboa, Sintra e Cascais`;
 
   return (
     <Head>

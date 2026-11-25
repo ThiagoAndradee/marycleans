@@ -19,7 +19,7 @@ export default function Footer() {
             </div>
             <p className="mt-4 text-sm leading-6 text-tinta-600">
               Serviços de limpeza para alojamento local, mediação imobiliária e habitação,
-              em Sintra e Lisboa.
+              em Lisboa, Sintra e Cascais.
             </p>
             <a
               href={`tel:${EMPRESA.telefoneDigitos}`}
