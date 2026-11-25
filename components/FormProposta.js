@@ -3,18 +3,21 @@ import { EMPRESA, FREQUENCIAS, WHATSAPP } from "../lib/negocio";
 
 // Formulário curto de proposta para empresas (gestoras de alojamento local, imobiliárias).
 //
-// ⚠ ENVIO DESLIGADO. Falta o email da Mary Cleans (PENDENTE.email em lib/negocio.js).
-// Enquanto ENVIO_LIGADO for false, o formulário valida, não envia nada para servidor nenhum
-// e mostra o resumo com a opção de o mandar por WhatsApp. Quando houver email, ligar aqui
-// o POST para /api/orcamento (ou para o serviço de email escolhido) e pôr ENVIO_LIGADO a true.
-const ENVIO_LIGADO = false;
+// O pedido segue por email através do FormSubmit (formsubmit.co) para EMPRESA.email.
+// No primeiro envio o FormSubmit manda um email de activação para essa caixa: enquanto
+// ninguém clicar nele, os pedidos não são entregues. Se o envio falhar por qualquer motivo,
+// o formulário mostra o resumo e oferece o WhatsApp, para o pedido não se perder.
+const ENVIO_LIGADO = true;
+const DESTINO = `https://formsubmit.co/ajax/${EMPRESA.email}`;
 
 const VAZIO = { empresa: "", imoveis: "", zona: "", frequencia: "", contacto: "" };
 
 export default function FormProposta({ zonaInicial = "", servico = "" }) {
   const [d, setD] = useState({ ...VAZIO, zona: zonaInicial });
   const [erros, setErros] = useState({});
-  const [pronto, setPronto] = useState(false);
+  const [pronto, setPronto] = useState(false); // false | "enviado" | "falhou"
+  const [enviando, setEnviando] = useState(false);
+  const [mel, setMel] = useState("");
 
   const mudar = (campo) => (e) => {
     setD((v) => ({ ...v, [campo]: e.target.value }));
@@ -30,7 +33,7 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
     `Contacto: ${d.contacto}`,
   ].join("\n");
 
-  const enviar = (e) => {
+  const enviar = async (e) => {
     e.preventDefault();
     const f = {};
     if (!d.empresa.trim()) f.empresa = "Indique a empresa ou o seu nome.";
@@ -41,26 +44,52 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
       f.contacto = "Indique um email ou um telefone.";
     setErros(f);
     if (Object.keys(f).length) return;
-    // ENVIO_LIGADO === false: nada sai daqui.
-    setPronto(true);
+    if (!ENVIO_LIGADO) return setPronto("falhou");
+    if (mel) return setPronto("enviado"); // campo-armadilha preenchido: é um robô
+    setEnviando(true);
+    try {
+      const r = await fetch(DESTINO, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Pedido de proposta: ${d.empresa} (${d.zona})`,
+          _template: "table",
+          _captcha: "false",
+          Empresa: d.empresa,
+          "Imóveis ou unidades": d.imoveis,
+          "Freguesia ou zona": d.zona,
+          Frequência: d.frequencia,
+          Contacto: d.contacto,
+          Serviço: servico,
+          Página: window.location.pathname,
+        }),
+      });
+      const j = await r.json().catch(() => ({}));
+      setPronto(r.ok && String(j.success) === "true" ? "enviado" : "falhou");
+    } catch {
+      setPronto("falhou");
+    } finally {
+      setEnviando(false);
+    }
   };
 
   if (pronto)
     return (
       <div className="cartao mt-8 max-w-2xl" role="status">
-        <h3 className="text-titulo-3 text-tinta-900">Pedido preenchido</h3>
-        {!ENVIO_LIGADO ? (
-          <p className="mt-3 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-            Pré-visualização: o envio por email ainda não está ligado [confirmar email da Mary
-            Cleans]. Para já, o pedido segue por WhatsApp.
-          </p>
-        ) : null}
+        <h3 className="text-titulo-3 text-tinta-900">
+          {pronto === "enviado" ? "Pedido enviado" : "Não conseguimos enviar o pedido"}
+        </h3>
+        <p className="mt-3 text-sm leading-6 text-tinta-600">
+          {pronto === "enviado"
+            ? "Respondemos por escrito para o contacto que indicou. Se preferir, pode mandar o mesmo pedido por WhatsApp."
+            : "O envio por email falhou. Mande o pedido por WhatsApp, já vai preenchido."}
+        </p>
         <pre className="mt-4 whitespace-pre-wrap text-sm leading-6 text-tinta-700">{resumo}</pre>
         <a
           href={WHATSAPP(resumo)}
           target="_blank"
           rel="noreferrer noopener"
-          className="botao mt-5"
+          className={pronto === "enviado" ? "botao-secundario mt-5" : "botao mt-5"}
         >
           Enviar por WhatsApp
         </a>
@@ -83,11 +112,16 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
 
   return (
     <form onSubmit={enviar} noValidate className="mt-8 max-w-2xl" data-envio={ENVIO_LIGADO ? "ligado" : "desligado"}>
-      {!ENVIO_LIGADO ? (
-        <p className="mb-5 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-          Pré-visualização: formulário sem envio ligado [confirmar email da Mary Cleans].
-        </p>
-      ) : null}
+      <input
+        type="text"
+        name="_honey"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={mel}
+        onChange={(e) => setMel(e.target.value)}
+      />
       <div className="grid gap-5 sm:grid-cols-2">
         {Campo({
           id: "empresa",
@@ -131,8 +165,8 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
         </div>
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-4">
-        <button type="submit" className="botao">
-          Pedir proposta
+        <button type="submit" className="botao" disabled={enviando}>
+          {enviando ? "A enviar..." : "Pedir proposta"}
         </button>
         <span className="text-sm text-tinta-500">
           Os dados servem só para responder a este pedido. Ver a{" "}

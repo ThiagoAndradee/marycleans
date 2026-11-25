@@ -28,6 +28,12 @@ export default function Footer() {
             >
               {EMPRESA.telefone}
             </a>
+            <a
+              href={`mailto:${EMPRESA.email}`}
+              className="mt-2 block text-sm text-tinta-600 hover:text-tinta-900"
+            >
+              {EMPRESA.email}
+            </a>
           </div>
 
           <div>
@@ -94,7 +100,10 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-tinta-200 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-tinta-500">
-            &copy; {ANO} Mary Cleans. Todos os direitos reservados.
+            &copy; {ANO} Mary Cleans. Todos os direitos reservados.{" "}
+            <a href="https://www.beabstracto.com" className="underline underline-offset-2 hover:text-tinta-800">
+              A company by Beabstracto
+            </a>
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li>

@@ -10,7 +10,7 @@ import AntesDepois from "../components/AntesDepois";
 export default function Home() {
   return (
     <Pagina
-      descricao="Serviços de limpeza para alojamento local, mediação imobiliária e habitação, em Lisboa, Sintra, Cascais, Oeiras e Amadora. Preço fechado por imóvel e relatório fotográfico em cada limpeza."
+      descricao="Limpeza de alojamento local e de imóveis para venda em Lisboa, Sintra e Cascais. Mesma equipa, preço fechado por imóvel e relatório fotográfico."
       caminho="/"
     >
       <HeroV2 />

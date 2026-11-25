@@ -60,25 +60,22 @@ export default function HeroV2() {
             Lisboa, Sintra e Cascais
           </p>
 
-          <h1 className="mt-6 text-[2.4rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-6xl xl:text-[4.25rem]">
-            A casa pronta
-            <br />
-            <span className="text-marca-200">
-              antes do próximo hóspede.
-            </span>
+          <h1 className="mt-6 text-[2.1rem] font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl xl:text-[3.5rem]">
+            Limpeza de alojamento local em Lisboa,{" "}
+            <span className="text-marca-200">com a casa pronta antes do check-in.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
-            Limpeza entre hóspedes e de imóveis para venda, com preço fechado por casa. Troca de
-            roupa de cama, reposição de consumíveis e fotografias de cada divisão no fim.
+            Para gestoras de alojamento local e imobiliárias. A mesma equipa em todas as casas,
+            preço fechado por imóvel e relatório com fotografias depois de cada limpeza.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/contacto"
+              href="/limpeza-alojamento-local-lisboa#proposta"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-base font-semibold text-marca-950 shadow-[0_10px_40px_-10px_rgba(142,195,218,0.7)] transition hover:bg-marca-50"
             >
-              Pedir orçamento
+              Pedir proposta
               <span aria-hidden="true">→</span>
             </Link>
             <a

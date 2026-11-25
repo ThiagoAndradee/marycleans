@@ -6,7 +6,7 @@ export default function Contacto() {
   return (
     <Pagina
       titulo="Pedir Orçamento"
-      descricao="Pedido de orçamento de limpeza para Sintra, Lisboa, Cascais, Oeiras e Amadora. Resposta por escrito em 24 horas, sem visita obrigatória."
+      descricao="Pedido de orçamento de limpeza para Lisboa, Sintra, Cascais, Oeiras e Amadora. Resposta por escrito em 24 horas, sem visita obrigatória."
       caminho="/contacto"
     >
       <section className="border-b border-tinta-200">
@@ -40,6 +40,14 @@ export default function Contacto() {
                     className="font-semibold text-tinta-900"
                   >
                     {EMPRESA.telefone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-etiqueta uppercase text-tinta-500">Email</dt>
+                <dd className="mt-1">
+                  <a href={`mailto:${EMPRESA.email}`} className="font-semibold text-tinta-900">
+                    {EMPRESA.email}
                   </a>
                 </dd>
               </div>

@@ -54,6 +54,10 @@ export default function Privacidade() {
               Nao usamos os seus dados para publicidade, e nao os vendemos nem cedemos a
               terceiros para fins comerciais.
             </p>
+            <p className="mt-3 text-sm leading-6">
+              O pedido de proposta feito no site chega-nos por email através do serviço
+              FormSubmit, que o encaminha para a nossa caixa de correio.
+            </p>
           </div>
 
           <div>

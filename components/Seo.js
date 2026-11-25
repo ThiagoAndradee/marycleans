@@ -43,6 +43,7 @@ export const negocioJsonLd = {
   name: EMPRESA.nome,
   description: EMPRESA.descricao,
   telephone: EMPRESA.telefone,
+  email: EMPRESA.email,
   url: SITE,
   image: SITE + imagemPartilha.src,
   areaServed: CONCELHOS.map((c) => ({ "@type": "City", name: c.nome })),
@@ -55,6 +56,7 @@ export const negocioJsonLd = {
   contactPoint: {
     "@type": "ContactPoint",
     telephone: EMPRESA.telefone,
+    email: EMPRESA.email,
     contactType: "customer service",
     availableLanguage: "pt-PT",
   },
