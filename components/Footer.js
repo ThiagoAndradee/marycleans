@@ -84,6 +84,11 @@ export default function Footer() {
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li>
+              <Link href="/blog" className="text-xs text-tinta-500 hover:text-tinta-800">
+                Blog
+              </Link>
+            </li>
+            <li>
               <Link href="/privacidade" className="text-xs text-tinta-500 hover:text-tinta-800">
                 Política de Privacidade
               </Link>

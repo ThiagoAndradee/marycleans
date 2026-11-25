@@ -20,6 +20,10 @@ const rotas = [
   "/rgpd",
   ...slugs("VERTICAIS").map((s) => `/servicos/${s}`),
   ...slugs("CONCELHOS").map((s) => `/limpezas/${s}`),
+  "/blog",
+  ...[...readFileSync("./lib/blog.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)].map(
+    (m) => `/blog/${m[1]}`
+  ),
 ];
 
 const hoje = new Date().toISOString().slice(0, 10);
