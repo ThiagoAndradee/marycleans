@@ -41,7 +41,7 @@ const ETAPAS = [
 export default function AlojamentoLocal() {
   return (
     <Pagina
-      titulo="Limpeza de Alojamento Local em Sintra e Lisboa"
+      titulo="Alojamento Local: como trabalhamos"
       descricao="Rotação de limpeza entre hóspedes, com troca de roupa de cama, reposição de consumíveis e relatório fotográfico. Preço fechado por imóvel, incluindo limpeza noturna com marcação prévia."
       caminho="/servicos/alojamento-local"
     >

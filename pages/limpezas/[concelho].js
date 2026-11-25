@@ -9,7 +9,7 @@ export default function Concelho({ concelho, outros, guias }) {
 
   return (
     <Pagina
-      titulo={`Limpeza em ${concelho.nome}`}
+      titulo={`Limpeza em ${concelho.nome}: serviços e zonas`}
       descricao={`Serviços de limpeza em ${concelho.nome}: alojamento local, mediação imobiliária e habitação. Preço fechado por imóvel, relatório fotográfico e orçamento por escrito.`}
       caminho={`/limpezas/${concelho.slug}`}
     >
@@ -22,7 +22,7 @@ export default function Concelho({ concelho, outros, guias }) {
           <p className="prosa mt-6">
             <span className="text-entrada">
               {ehBase
-                ? `${concelho.nome} é a cidade onde mais trabalhamos. Servimos todas as freguesias, do centro histórico ao Parque das Nações.`
+                ? `A Mary Cleans faz limpeza de alojamento local, limpeza para venda de casa, pós-obra e limpeza de habitação em ${concelho.nome}. O preço é fechado por imóvel e cada serviço termina com um relatório fotográfico.`
                 : `${concelho.nome} faz parte da nossa área de serviço. Quando há custo de deslocação, vem indicado à parte no orçamento.`}
             </span>
           </p>

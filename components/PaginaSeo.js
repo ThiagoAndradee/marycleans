@@ -171,7 +171,10 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
               ))}
             </ul>
             <p className="mt-4 max-w-leitura text-sm leading-6 text-tinta-600">
-              Não lavamos nem engomamos roupa de cama. O âmbito de todos os serviços está em{" "}
+              {pagina.servicoTipo.includes("alojamento")
+                ? "Não lavamos nem engomamos roupa de cama. "
+                : ""}
+              O âmbito de todos os serviços está em{" "}
               <Link
                 href={`/servicos#${servico.slug}`}
                 className="font-medium text-marca-700 underline underline-offset-2"
@@ -197,6 +200,23 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
               </div>
             ))}
           </dl>
+          {pagina.fontes ? (
+            <p className="mt-8 text-xs text-tinta-500">
+              Fonte dos valores de mercado:{" "}
+              {pagina.fontes.map((f) => (
+                <a
+                  key={f.url}
+                  href={f.url}
+                  target="_blank"
+                  rel="noreferrer noopener nofollow"
+                  className="underline underline-offset-2"
+                >
+                  {f.rotulo}
+                </a>
+              ))}
+              , consultado em Novembro de 2026.
+            </p>
+          ) : null}
         </div>
       </section>
 
