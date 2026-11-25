@@ -2,32 +2,33 @@ import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
 import { CONCELHOS, VERTICAIS, SERVICOS, EMPRESA } from "../../lib/negocio";
+import { PAGINAS_SEO } from "../../lib/seo-paginas";
 
-export default function Concelho({ concelho, outros }) {
+export default function Concelho({ concelho, outros, guias }) {
   const ehBase = concelho.base;
 
   return (
     <Pagina
       titulo={`Limpeza em ${concelho.nome}`}
-      descricao={`Servicos de limpeza em ${concelho.nome}: alojamento local, mediacao imobiliaria e habitacao. Preco fechado por imovel, relatorio fotografico e orcamento em 24 horas.`}
+      descricao={`Serviços de limpeza em ${concelho.nome}: alojamento local, mediação imobiliária e habitação. Preço fechado por imóvel, relatório fotográfico e orçamento por escrito.`}
       caminho={`/limpezas/${concelho.slug}`}
     >
       <section className="border-b border-tinta-200">
         <div className="secao py-14 sm:py-16">
-          <p className="etiqueta-secao">Area de servico</p>
+          <p className="etiqueta-secao">Área de serviço</p>
           <h1 className="mt-4 max-w-3xl text-titulo-1">
             Limpeza em {concelho.nome}.
           </h1>
           <p className="prosa mt-6">
             <span className="text-entrada">
               {ehBase
-                ? `${concelho.nome} e a nossa base. A maioria dos imoveis que servimos fica aqui, e e por isso que conseguimos fazer mais do que um imovel na mesma saida, e responder no mesmo dia.`
-                : `Servimos ${concelho.nome} com deslocacao a partir de Sintra. A deslocacao e considerada no orcamento, e indicada de forma separada em vez de diluida no preco.`}
+                ? `${concelho.nome} é a cidade onde mais trabalhamos. Servimos todas as freguesias, do centro histórico ao Parque das Nações.`
+                : `${concelho.nome} faz parte da nossa área de serviço. Quando há custo de deslocação, vem indicado à parte no orçamento.`}
             </span>
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/contacto" className="botao">
-              Pedir orcamento
+              Pedir orçamento
             </Link>
             <a href={`tel:${EMPRESA.telefoneDigitos}`} className="botao-secundario">
               {EMPRESA.telefone}
@@ -39,7 +40,7 @@ export default function Concelho({ concelho, outros }) {
       <section className="secao secao-espaco">
         <h2 className="etiqueta-secao">Para quem</h2>
         <p className="mt-3 max-w-leitura text-titulo-2">
-          Tres contextos, em {concelho.nome}.
+          Três contextos, em {concelho.nome}.
         </p>
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {VERTICAIS.map((v) => (
@@ -77,7 +78,7 @@ export default function Concelho({ concelho, outros }) {
       ) : null}
 
       <section className="secao secao-espaco">
-        <h2 className="etiqueta-secao">Servicos</h2>
+        <h2 className="etiqueta-secao">Serviços</h2>
         <p className="mt-3 max-w-leitura text-titulo-2">
           O que fazemos em {concelho.nome}.
         </p>
@@ -96,16 +97,39 @@ export default function Concelho({ concelho, outros }) {
         </ul>
       </section>
 
+      {guias.length ? (
+        <section className="border-t border-tinta-200">
+          <div className="secao secao-espaco">
+            <h2 className="etiqueta-secao">Páginas de {concelho.nome}</h2>
+            <p className="mt-3 max-w-leitura text-titulo-2">
+              Por serviço e por zona.
+            </p>
+            <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+              {guias.map((g) => (
+                <li key={g.slug} className="border-b border-tinta-200 pb-3">
+                  <Link
+                    href={`/${g.slug}`}
+                    className="text-sm font-semibold text-tinta-900 hover:text-marca-700"
+                  >
+                    {g.rotulo}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <section className="border-t border-tinta-200 bg-tinta-50">
         <div className="secao secao-espaco">
-          <h2 className="etiqueta-secao">Orcamento</h2>
+          <h2 className="etiqueta-secao">Orçamento</h2>
           <p className="mt-3 max-w-leitura text-titulo-2">
-            Para um imovel em {concelho.nome}.
+            Para um imóvel em {concelho.nome}.
           </p>
           <FormOrcamento compacto />
 
           <div className="mt-12 border-t border-tinta-200 pt-8">
-            <h2 className="text-etiqueta uppercase text-tinta-500">Outras areas</h2>
+            <h2 className="text-etiqueta uppercase text-tinta-500">Outras áreas</h2>
             <ul className="mt-4 flex flex-wrap gap-3">
               {outros.map((c) => (
                 <li key={c.slug}>
@@ -138,6 +162,11 @@ export function getStaticProps({ params }) {
   return {
     props: {
       concelho,
+      guias: PAGINAS_SEO.filter((p) =>
+        concelho.slug === "lisboa"
+          ? p.grupo !== "area"
+          : p.slug.endsWith(`-${concelho.slug}`)
+      ).map(({ slug, rotulo }) => ({ slug, rotulo })),
       outros: CONCELHOS.filter((c) => c.slug !== concelho.slug).map(({ slug, nome }) => ({
         slug,
         nome,

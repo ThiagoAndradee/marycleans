@@ -3,6 +3,7 @@ import Pagina from "../../components/Pagina";
 import TextoComLinks, { semLinks } from "../../components/blog/TextoComLinks";
 import { POSTS, postPorSlug } from "../../lib/blog";
 import { EMPRESA, WHATSAPP } from "../../lib/negocio";
+import { paginasQueCitamPost } from "../../lib/seo-paginas";
 
 const SITE = "https://www.marycleans.pt";
 
@@ -35,7 +36,7 @@ function Bloco({ b }) {
   );
 }
 
-export default function Post({ post, outros }) {
+export default function Post({ post, outros, servicos = [] }) {
   const url = `${SITE}/blog/${post.slug}`;
   const jsonLd = [
     {
@@ -114,6 +115,24 @@ export default function Post({ post, outros }) {
             </dl>
           </section>
 
+          {servicos.length ? (
+            <section className="mt-14 max-w-leitura border-t border-tinta-200 pt-10">
+              <h2 className="etiqueta-secao">Serviços de que este artigo fala</h2>
+              <ul className="mt-5 space-y-3">
+                {servicos.map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      href={`/${p.slug}`}
+                      className="font-medium text-marca-700 underline underline-offset-2 hover:text-marca-600"
+                    >
+                      {p.rotulo}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           <aside className="cartao mt-14 max-w-leitura bg-tinta-50">
             <h2 className="text-titulo-3 text-tinta-900">Pedir orçamento</h2>
             <p className="mt-3 text-sm leading-6 text-tinta-600">
@@ -169,6 +188,9 @@ export function getStaticProps({ params }) {
   return {
     props: {
       post,
+      servicos: paginasQueCitamPost(post.slug)
+        .slice(0, 5)
+        .map(({ slug, rotulo }) => ({ slug, rotulo })),
       outros: POSTS.filter((p) => p.slug !== post.slug)
         .slice(0, 4)
         .map(({ slug, titulo, resumo }) => ({ slug, titulo, resumo })),

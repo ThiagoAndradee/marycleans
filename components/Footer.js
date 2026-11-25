@@ -1,6 +1,7 @@
 import Link from "next/link";
 import logo from "../assets/logo.svg";
 import { EMPRESA, VERTICAIS, SERVICOS, CONCELHOS } from "../lib/negocio";
+import { INDICE_SEO } from "../lib/seo-indice";
 
 // O rodapé anterior era o do template em inglês: Marketing, Analytics, Commerce, API Status,
 // Jobs, Press, e "© 2020 Mary Cleans, Inc.". Nada disso existia.
@@ -19,7 +20,7 @@ export default function Footer() {
             </div>
             <p className="mt-4 text-sm leading-6 text-tinta-600">
               Serviços de limpeza para alojamento local, mediação imobiliária e habitação,
-              em Sintra e Lisboa.
+              em Lisboa, Sintra e Cascais.
             </p>
             <a
               href={`tel:${EMPRESA.telefoneDigitos}`}
@@ -78,7 +79,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-tinta-200 pt-7 sm:flex-row sm:items-center sm:justify-between">
+        <nav aria-label="Serviços por zona" className="mt-12 border-t border-tinta-200 pt-7">
+          <h2 className="etiqueta-secao">Serviços por zona</h2>
+          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2.5">
+            {INDICE_SEO.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/${p.slug}`} className="text-sm text-tinta-600 hover:text-tinta-900">
+                  {p.rotulo}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-10 flex flex-col gap-4 border-t border-tinta-200 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-tinta-500">
             &copy; {ANO} Mary Cleans. Todos os direitos reservados.
           </p>
