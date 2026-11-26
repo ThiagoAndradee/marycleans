@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { EMPRESA, CONCELHOS } from "../lib/negocio";
 import { SITE, VERIFICACAO } from "../lib/site";
+import { META_AJUSTES } from "../lib/meta-ajustes";
 
 export { SITE };
 
@@ -18,14 +19,17 @@ const siteJsonLd = {
   publisher: { "@id": `${SITE}/#negocio` },
 };
 
-export default function Seo({ titulo, descricao, caminho = "/", jsonLd, noindex = false }) {
+export default function Seo({ titulo: tituloOrigem, descricao: descricaoOrigem, caminho = "/", jsonLd, noindex = false }) {
+  const ajuste = META_AJUSTES[caminho] || {};
+  const titulo = ajuste.titulo || tituloOrigem;
+  const descricao = ajuste.descricao || descricaoOrigem;
   // O Google corta o título perto dos 60 caracteres: a marca só entra no fim se couber.
   const comMarca = `${titulo} | ${EMPRESA.nome}`;
   const tituloCompleto = titulo
     ? comMarca.length <= 60
       ? comMarca
       : titulo
-    : `${EMPRESA.nome} | Serviços de limpeza em Lisboa, Sintra e Cascais`;
+    : `${EMPRESA.nome} | Limpeza em Lisboa, Sintra e Cascais`;
 
   return (
     <Head>

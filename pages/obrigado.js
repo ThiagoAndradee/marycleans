@@ -8,7 +8,7 @@ export default function Obrigado() {
   return (
     <Pagina
       titulo="Pedido recebido"
-      descricao="O pedido de orcamento foi recebido. Respondemos em 24 horas."
+      descricao="O pedido de orçamento foi recebido. Respondemos em 24 horas."
       caminho="/obrigado"
       noindex
     >
@@ -19,8 +19,8 @@ export default function Obrigado() {
         </h1>
         <p className="prosa mt-6">
           <span className="text-entrada">
-            Respondemos em 24 horas, por escrito, com o ambito do servico definido e o preco
-            fechado. Se for necessario ver o imovel antes de orcamentar, dizemos isso na
+            Respondemos em 24 horas, por escrito, com o âmbito do serviço definido e o preço
+            fechado. Se for necessário ver o imóvel antes de orcamentar, dizemos isso na
             resposta.
           </span>
         </p>
@@ -28,7 +28,7 @@ export default function Obrigado() {
         <div className="mt-10 border-t border-tinta-200 pt-8">
           <h2 className="text-titulo-3">Se for urgente</h2>
           <p className="mt-2 max-w-leitura text-sm leading-6 text-tinta-600">
-            Ligue diretamente. Um imovel com visita ou com check-in marcado para as proximas
+            Ligue diretamente. Um imóvel com visita ou com check-in marcado para as próximas
             horas resolve-se melhor por telefone.
           </p>
           <a href={`tel:${EMPRESA.telefoneDigitos}`} className="botao mt-5">
@@ -38,7 +38,7 @@ export default function Obrigado() {
 
         <div className="mt-10">
           <Link href="/" className="text-sm font-semibold text-marca-700">
-            Voltar ao inicio
+            Voltar ao início
           </Link>
         </div>
       </section>

@@ -69,6 +69,13 @@
            focus:ring-1 focus:ring-marca-600;
   }
 
+  /* Telemóvel: 16 px no campo (o iPhone deixa de fazer zoom ao tocar) e 44 px de altura. */
+  @media (max-width: 480px) {
+    .campo {
+      @apply min-h-[44px] text-base;
+    }
+  }
+
   .rotulo {
     @apply mb-1.5 block text-sm font-medium text-tinta-800;
   }

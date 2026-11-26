@@ -1,7 +1,8 @@
 # Mary Cleans. Site público: pode ler, indexar e citar.
 # Content-Signal: search=yes, ai-input=yes, ai-train=yes
+# (fica só como comentário: a linha Content-Signal fora de comentário é "diretiva desconhecida"
+# para o Google e para o Lighthouse, e tirava pontos de SEO.)
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /admin
 Disallow: /api/

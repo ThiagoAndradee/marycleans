@@ -27,7 +27,7 @@ export default function PromoFaixa() {
           <span className="sm:hidden">25% na primeira limpeza de check-out</span>
         </span>
         <span className="hidden text-white/65 md:inline">Pedidos até 30/11</span>
-        <Link href={LINK_PROMO} className="font-semibold text-marca-200 underline underline-offset-4 hover:text-white">
+        <Link href={LINK_PROMO} className="font-semibold text-marca-200 underline underline-offset-4 hover:text-white max-[480px]:py-3">
           Pedir proposta
         </Link>
       </div>
@@ -54,7 +54,7 @@ export function PromoCartao({ claro = false }) {
       <div className="col-span-2 mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href={LINK_PROMO}
-          className="inline-flex items-center justify-center rounded-lg bg-[#5fd0a0] px-4 py-2.5 text-sm font-semibold text-marca-950 transition hover:bg-[#7ddcb4]"
+          className="inline-flex items-center justify-center rounded-lg bg-[#5fd0a0] max-[480px]:min-h-[44px] px-4 py-2.5 text-sm font-semibold text-marca-950 transition hover:bg-[#7ddcb4]"
         >
           Pedir proposta com desconto
         </Link>

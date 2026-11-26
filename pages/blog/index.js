@@ -29,7 +29,7 @@ export default function Blog({ posts }) {
 
   return (
     <Pagina
-      titulo="Blog: limpeza de alojamento local e imóveis em Sintra e Lisboa"
+      titulo="Blog de limpeza: alojamento local e imóveis em Lisboa"
       descricao="Artigos práticos sobre limpeza de alojamento local, entrega de chaves, preparação de casa para venda e preços de limpeza em Sintra e Lisboa."
       caminho="/blog"
       jsonLd={jsonLd}

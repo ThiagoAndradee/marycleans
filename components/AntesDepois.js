@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Foto from "./Foto";
 
 // Comparador antes e depois. As duas imagens são ilustrativas (geradas por IA) até haver
 // fotografias reais de uma limpeza, tiradas com autorização do proprietário.
@@ -25,18 +26,24 @@ export default function AntesDepois() {
 
           <div className="lg:col-span-8">
             <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_120px_-30px_rgba(43,142,180,0.55)]">
-              <img
-                src="/media/depois.jpg"
+              <Foto
+                nome="depois"
+                larguras={[640, 960, 1293]}
+                largura={1293}
+                altura={729}
+                sizes="(min-width: 1024px) 740px, calc(100vw - 48px)"
                 alt="Sala de alojamento local arrumada e limpa, pronta para o próximo hóspede"
                 className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
               />
               <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-                <img
-                  src="/media/antes.jpg"
+                <Foto
+                  nome="antes"
+                  larguras={[640, 960, 1293]}
+                  largura={1293}
+                  altura={729}
+                  sizes="(min-width: 1024px) 740px, calc(100vw - 48px)"
                   alt="A mesma sala logo após a saída dos hóspedes, por arrumar"
                   className="h-full w-full object-cover"
-                  loading="lazy"
                 />
               </div>
               <div
@@ -71,11 +78,14 @@ export default function AntesDepois() {
         <div className="mt-20 grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="order-2 lg:order-1 lg:col-span-7">
             <div className="overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_120px_-30px_rgba(43,142,180,0.45)]">
-              <img
-                src="/media/equipa.jpg"
+              <Foto
+                nome="equipa"
+                larguras={[640, 960, 1280]}
+                largura={1280}
+                altura={720}
+                sizes="(min-width: 1024px) 640px, calc(100vw - 48px)"
                 alt="Profissionais de uniforme Mary Cleans a limpar a cozinha de um alojamento local em Lisboa"
                 className="aspect-[16/9] w-full object-cover"
-                loading="lazy"
               />
             </div>
             <p className="mt-3 text-right text-[11px] text-white/50">Imagem ilustrativa</p>

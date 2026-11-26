@@ -2,6 +2,7 @@
 // public/llms.txt. Roda no prebuild.
 import { writeFileSync } from "node:fs";
 import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 
 const src = readFileSync("./lib/negocio.js", "utf8");
 const slugs = (nomeArray) => {
@@ -42,12 +43,41 @@ if (noIndice !== noConteudo) {
 }
 
 const hoje = new Date().toISOString().slice(0, 10);
+// lastmod real, não a data do build: as páginas de zona usam SEO_DATA, os posts BLOG_DATA,
+// e as restantes a data do último commit do ficheiro (ou SEO_DATA se o git não estiver à mão).
+const constante = (f, nome) =>
+  (readFileSync(f, "utf8").match(new RegExp(`${nome}\\s*=\\s*"(\\d{4}-\\d{2}-\\d{2})"`)) || [])[1];
+const SEO_DATA = constante("./lib/seo-indice.js", "SEO_DATA") || hoje;
+const BLOG_DATA = constante("./lib/blog.js", "BLOG_DATA") || SEO_DATA;
+const ficheiroDaRota = {
+  "/": "pages/index.js",
+  "/servicos": "pages/servicos/index.js",
+  "/contacto": "pages/contacto.js",
+  "/privacidade": "pages/privacidade.js",
+  "/rgpd": "pages/rgpd.js",
+  "/blog": "lib/blog.js",
+};
+const dataGit = (f) => {
+  try {
+    const d = execFileSync("git", ["log", "-1", "--format=%cs", "--", f], { encoding: "utf8" }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null;
+  } catch {
+    return null;
+  }
+};
+const lastmod = (r) => {
+  if (r.startsWith("/blog/")) return BLOG_DATA;
+  if (r.startsWith("/servicos/")) return dataGit(`pages${r}.js`) || SEO_DATA;
+  if (r.startsWith("/limpezas/")) return dataGit("lib/negocio.js") || SEO_DATA;
+  if (ficheiroDaRota[r]) return dataGit(ficheiroDaRota[r]) || SEO_DATA;
+  return SEO_DATA; // páginas de zona (lib/seo-paginas.js)
+};
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${rotas
   .map(
     (r) =>
-      `  <url><loc>${SITE}${r}</loc><lastmod>${hoje}</lastmod><priority>${
+      `  <url><loc>${SITE}${r}</loc><lastmod>${lastmod(r)}</lastmod><priority>${
         r === "/" ? "1.0" : r.startsWith("/servicos/") || r.startsWith("/limpeza-") || r.startsWith("/empresa-") || r.startsWith("/contrato-") ? "0.9" : "0.7"
       }</priority></url>`
   )
@@ -61,8 +91,9 @@ writeFileSync(
   "./public/robots.txt",
   `# Mary Cleans. Site público: pode ler, indexar e citar.
 # Content-Signal: search=yes, ai-input=yes, ai-train=yes
+# (fica só como comentário: a linha Content-Signal fora de comentário é "diretiva desconhecida"
+# para o Google e para o Lighthouse, e tirava pontos de SEO.)
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /admin
 Disallow: /api/

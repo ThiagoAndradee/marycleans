@@ -158,7 +158,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
           <nav aria-label="Caminho" className="text-sm text-tinta-500">
             {caminho.slice(0, -1).map((m) => (
               <span key={m.href}>
-                <Link href={m.href} className="hover:text-tinta-800">
+                <Link href={m.href} className="hover:text-tinta-800 max-[480px]:py-3">
                   {m.nome}
                 </Link>
                 <span className="mx-2">/</span>
@@ -250,7 +250,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
             ))}
           </dl>
           {pagina.fontes ? (
-            <p className="mt-8 text-xs text-tinta-500">
+            <p className="mt-8 text-xs text-tinta-600">
               Fonte dos valores de mercado:{" "}
               {pagina.fontes.map((f) => (
                 <a
@@ -317,7 +317,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
                   <li key={r.slug}>
                     <Link
                       href={`/${r.slug}`}
-                      className="font-medium text-tinta-900 underline decoration-tinta-300 underline-offset-4 hover:text-marca-700"
+                      className="font-medium text-tinta-900 underline decoration-tinta-300 underline-offset-4 hover:text-marca-700 max-[480px]:py-3"
                     >
                       {r.rotulo}
                     </Link>
@@ -333,7 +333,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
                     <li key={p.slug}>
                       <Link
                         href={`/blog/${p.slug}`}
-                        className="font-medium text-tinta-900 underline decoration-tinta-300 underline-offset-4 hover:text-marca-700"
+                        className="font-medium text-tinta-900 underline decoration-tinta-300 underline-offset-4 hover:text-marca-700 max-[480px]:py-3"
                       >
                         {p.titulo}
                       </Link>
@@ -343,7 +343,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
               </div>
             ) : null}
           </div>
-          <p className="mt-10 text-xs text-tinta-500">
+          <p className="mt-10 text-xs text-tinta-600">
             Página revista em{" "}
             <time dateTime={SEO_DATA}>
               {new Date(`${SEO_DATA}T12:00:00Z`).toLocaleDateString("pt-PT", {

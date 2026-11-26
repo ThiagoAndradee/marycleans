@@ -1,3 +1,4 @@
+import { conversao } from "../lib/medicao";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import {
@@ -94,6 +95,7 @@ export default function FormOrcamento({ servicoInicial, compacto = false }) {
       if (corpo.viaWhatsApp) {
         window.open(WHATSAPP(resumoTexto({ ...dados, promo: promoAtiva() ? PROMO.codigo : "" })), "_blank", "noopener");
       }
+      conversao("lead_orcamento", { servico: dados.servico, concelho: dados.concelho });
       router.push("/obrigado");
     } catch (erro) {
       setFalha(erro.message);

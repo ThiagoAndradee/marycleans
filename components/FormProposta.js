@@ -1,3 +1,4 @@
+import { conversao } from "../lib/medicao";
 import { useState } from "react";
 import { EMPRESA, FREQUENCIAS, WHATSAPP } from "../lib/negocio";
 import { PROMO, promoAtiva } from "../lib/promo";
@@ -70,7 +71,9 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
         }),
       });
       const j = await r.json().catch(() => ({}));
-      setPronto(r.ok && String(j.success) === "true" ? "enviado" : "falhou");
+      const ok = r.ok && String(j.success) === "true";
+      if (ok) conversao("lead_proposta", { servico, zona: d.zona });
+      setPronto(ok ? "enviado" : "falhou");
     } catch {
       setPronto("falhou");
     } finally {

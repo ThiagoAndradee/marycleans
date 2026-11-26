@@ -28,7 +28,7 @@ export default function Imobiliarias() {
   return (
     <Pagina
       titulo="Limpeza para Mediação Imobiliária em Sintra e Lisboa"
-      descricao="Imóvel pronto para visita, entrega de chaves com registo fotográfico do estado, e limpeza de imóvel devoluto ou pós-obra. Prioridade de agenda para consultores parceiros."
+      descricao="Imóvel pronto para visita, entrega de chaves com registo fotográfico e limpeza de imóvel devoluto ou pós-obra. Prioridade de agenda para consultores."
       caminho="/servicos/imobiliarias"
     >
       <section className="border-b border-tinta-200">

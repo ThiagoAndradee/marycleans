@@ -2,14 +2,14 @@ import Link from "next/link";
 import Pagina from "../components/Pagina";
 import { EMPRESA } from "../lib/negocio";
 
-// A pagina de RGPD nao repete a politica de privacidade: e a pagina pratica de como exercer
-// os direitos, e e o que um cliente empresarial procura antes de assinar contrato.
+// A página de RGPD não repete a política de privacidade: é a página prática de como exercer
+// os direitos, e é o que um cliente empresarial procura antes de assinar contrato.
 
 export default function Rgpd() {
   return (
     <Pagina
-      titulo="RGPD"
-      descricao="Como exercer os direitos previstos no Regulamento Geral de Protecao de Dados junto da Mary Cleans, e como tratamos dados no ambito de contratos de prestacao de servico."
+      titulo="RGPD: como exercer os seus direitos"
+      descricao="Como exercer junto da Mary Cleans os direitos do Regulamento Geral de Proteção de Dados, e como tratamos dados em contratos de prestação de serviço."
       caminho="/rgpd"
     >
       <section className="secao py-14 sm:py-16">
@@ -20,38 +20,38 @@ export default function Rgpd() {
           <div>
             <h2 className="text-titulo-3">Como exercer os seus direitos</h2>
             <p className="mt-2 text-sm leading-6">
-              Basta pedir pelo numero {EMPRESA.telefone}, identificando o que pretende.
-              Respondemos no prazo maximo de trinta dias. Nao cobramos nada por isso.
+              Basta pedir pelo número {EMPRESA.telefone}, identificando o que pretende.
+              Respondemos no prazo máximo de trinta dias. Não cobramos nada por isso.
             </p>
           </div>
 
           <div>
             <h2 className="text-titulo-3">Clientes empresariais e contratos</h2>
             <p className="mt-2 text-sm leading-6">
-              Num contrato de limpeza de imoveis arrendados, o cliente e o responsavel pelo
-              tratamento dos dados dos seus hospedes ou inquilinos, e a Mary Cleans atua como
-              subcontratante quando trata desses dados por conta dele. Nesse caso, e celebrado
-              um acordo de subcontratacao com as obrigacoes do artigo 28 do RGPD, incluindo
-              confidencialidade, seguranca, e eliminacao ou devolucao dos dados no fim do
+              Num contrato de limpeza de imóveis arrendados, o cliente é o responsável pelo
+              tratamento dos dados dos seus hóspedes ou inquilinos, e a Mary Cleans atua como
+              subcontratante quando trata desses dados por conta dele. Nesse caso, é celebrado
+              um acordo de subcontratação com as obrigações do artigo 28 do RGPD, incluindo
+              confidencialidade, segurança, e eliminação ou devolução dos dados no fim do
               contrato.
             </p>
           </div>
 
           <div>
-            <h2 className="text-titulo-3">Registo fotografico</h2>
+            <h2 className="text-titulo-3">Registo fotográfico</h2>
             <p className="mt-2 text-sm leading-6">
-              O relatorio fotografico documenta o estado do imovel, nao pessoas. Nao
-              fotografamos pessoas, nem documentos, nem objetos pessoais deixados no imovel. Se
+              O relatório fotográfico documenta o estado do imóvel, não pessoas. Não
+              fotografamos pessoas, nem documentos, nem objetos pessoais deixados no imóvel. Se
               um objeto pessoal aparecer de forma inevitavel numa fotografia, o cliente pode
-              pedir a substituicao dessa imagem.
+              pedir a substituição dessa imagem.
             </p>
           </div>
 
           <div>
-            <h2 className="text-titulo-3">Subcontratacao</h2>
+            <h2 className="text-titulo-3">Subcontratação</h2>
             <p className="mt-2 text-sm leading-6">
-              Quando recorremos a prestadores para parte do servico, apenas os
-              dados necessarios sao partilhados, e o prestador fica sujeito a dever de
+              Quando recorremos a prestadores para parte do serviço, apenas os
+              dados necessários são partilhados, e o prestador fica sujeito ao dever de
               confidencialidade.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function Rgpd() {
             <ul className="mt-2 space-y-2 text-sm leading-6">
               <li>
                 <Link href="/privacidade" className="font-medium text-marca-700 underline">
-                  Politica de Privacidade
+                  Política de Privacidade
                 </Link>
               </li>
               <li>
@@ -71,7 +71,7 @@ export default function Rgpd() {
                   rel="noreferrer noopener"
                   className="font-medium text-marca-700 underline"
                 >
-                  Livro de Reclamacoes Online
+                  Livro de Reclamações Online
                 </a>
               </li>
             </ul>

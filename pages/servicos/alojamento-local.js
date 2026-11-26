@@ -43,7 +43,7 @@ export default function AlojamentoLocal() {
   return (
     <Pagina
       titulo="Alojamento Local: como trabalhamos"
-      descricao="Rotação de limpeza entre hóspedes, com troca de roupa de cama, reposição de consumíveis e relatório fotográfico. Preço fechado por imóvel, incluindo limpeza noturna com marcação prévia."
+      descricao="Limpeza entre hóspedes com troca de roupa de cama, reposição de consumíveis e relatório fotográfico. Preço fechado por imóvel, também à noite com marcação."
       caminho="/servicos/alojamento-local"
     >
       <section className="border-b border-tinta-200">

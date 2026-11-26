@@ -1,6 +1,7 @@
 import Cabecalho from "./Cabecalho";
 import Footer from "./Footer";
 import BotaoWhatsApp from "./BotaoWhatsApp";
+import CtaTelemovel from "./CtaTelemovel";
 import PromoFaixa from "./PromoFaixa";
 import Seo, { negocioJsonLd } from "./Seo";
 
@@ -25,6 +26,7 @@ export default function Pagina({ titulo, descricao, caminho, jsonLd, noindex, ch
       <main id="conteudo">{children}</main>
       <Footer />
       <BotaoWhatsApp />
+      <CtaTelemovel />
     </>
   );
 }

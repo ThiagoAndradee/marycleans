@@ -7,7 +7,7 @@ export default function Servicos() {
   return (
     <Pagina
       titulo="Serviços de Limpeza"
-      descricao="Limpeza de manutenção, limpeza profunda, rotação de alojamento local, limpeza de apresentação, entrega de chaves, pós-obra e pós-mudança. Com âmbito definido por escrito."
+      descricao="Limpeza de manutenção, limpeza profunda, alojamento local, apresentação, entrega de chaves, pós-obra e pós-mudança. Âmbito definido por escrito."
       caminho="/servicos"
     >
       <section className="border-b border-tinta-200">

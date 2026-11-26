@@ -17,9 +17,9 @@ export default function Cabecalho() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-white/10 bg-marca-950/90 text-white backdrop-blur-md">
-      <div className="secao flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={EMPRESA.nome}>
-          <img src={logo.src} alt="" className="h-11 w-11 rounded-xl bg-white p-0.5" />
+      <div className="secao flex h-20 items-center justify-between gap-6 max-[480px]:h-16 max-[480px]:gap-4">
+        <Link href="/" prefetch={false} className="flex shrink-0 items-center gap-3 max-[480px]:min-h-[44px]" aria-label={EMPRESA.nome}>
+          <img src={logo.src} alt="" width={44} height={44} className="h-11 w-11 rounded-xl bg-white p-0.5 max-[480px]:h-10 max-[480px]:w-10" />
           <span className="whitespace-nowrap text-base font-bold tracking-tight text-white">
             Mary Cleans
           </span>
@@ -52,15 +52,16 @@ export default function Cabecalho() {
         <button
           type="button"
           onClick={() => setAberto(!aberto)}
-          className="rounded-lg border border-white/30 px-3 py-2 text-sm font-semibold text-white xl:hidden"
+          className="min-h-[44px] min-w-[44px] rounded-lg border border-white/30 px-3 py-2 text-sm font-semibold text-white xl:hidden"
           aria-expanded={aberto}
+          aria-controls="menu-telemovel"
         >
           {aberto ? "Fechar" : "Menu"}
         </button>
       </div>
 
       {aberto ? (
-        <div className="border-t border-white/10 xl:hidden">
+        <div id="menu-telemovel" className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 xl:hidden">
           <nav className="secao flex flex-col py-2" aria-label="Principal, telemóvel">
             {LINKS.map((l) => (
               <Link

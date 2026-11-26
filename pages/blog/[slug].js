@@ -83,9 +83,9 @@ export default function Post({ post, outros, servicos = [] }) {
         <header className="border-b border-tinta-200">
           <div className="secao py-14 sm:py-16">
             <nav aria-label="Caminho" className="text-sm text-tinta-500">
-              <Link href="/" className="hover:text-tinta-800">Início</Link>
+              <Link href="/" className="hover:text-tinta-800 max-[480px]:py-3">Início</Link>
               <span className="mx-2">/</span>
-              <Link href="/blog" className="hover:text-tinta-800">Blog</Link>
+              <Link href="/blog" className="hover:text-tinta-800 max-[480px]:py-3">Blog</Link>
             </nav>
             <h1 className="mt-5 max-w-3xl text-titulo-1">{post.titulo}</h1>
             <p className="mt-5 text-sm text-tinta-500">

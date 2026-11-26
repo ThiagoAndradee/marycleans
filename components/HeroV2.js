@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import VideoLoop from "./VideoLoop";
 import { videoDoGrupo } from "../lib/videos";
@@ -14,6 +15,13 @@ const FACTOS = [
   { titulo: "Fotografias no fim", texto: "Cada divisão fotografada, enviadas a si quando a casa fica pronta." },
 ];
 
+// Imagem do hero: o poster do vídeo da home (o que sempre apareceu no ecrã), em duas larguras.
+const HERO = {
+  webp: "/media/video/home-poster.webp",
+  webp640: "/media/video/home-poster-640.webp",
+  avif640: "/media/video/home-poster-640.avif",
+};
+
 const MENSAGEM = "Bom dia. Gostaria de pedir um orçamento de limpeza. O imóvel fica em ";
 
 export default function HeroV2() {
@@ -21,16 +29,34 @@ export default function HeroV2() {
 
   return (
     <section className="relative isolate overflow-hidden bg-marca-950 text-white">
+      <Head>
+        <link rel="preload" as="image" href={HERO.avif640} type="image/avif" media="(max-width: 767px)" fetchpriority="high" />
+        <link rel="preload" as="image" href={HERO.webp} type="image/webp" media="(min-width: 768px)" fetchpriority="high" />
+      </Head>
       {/* Fundo: vídeo com poster, escurecido para o texto passar 4,5:1 */}
       <div className="absolute inset-0 -z-10">
         {/* Poster sempre; o vídeo de empresa só entra no computador e depois da página carregar. */}
-        <img src="/media/hero-empresa.webp" alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
-        {video ? <VideoLoop video={video} className="absolute inset-0 h-full w-full object-cover" /> : null}
+        {/* A imagem visível é o poster do vídeo (era o atributo poster do <video>). Agora é uma
+            <img> com prioridade: no telemóvel desce a versão de 640 px e o vídeo nem é pedido.
+            A antiga hero-empresa.webp ficava escondida por baixo e era descarregada à toa. */}
+        <picture>
+          <source media="(max-width: 767px)" type="image/avif" srcSet={HERO.avif640} />
+          <source media="(max-width: 767px)" type="image/webp" srcSet={HERO.webp640} />
+          <img
+            src={HERO.webp}
+            alt=""
+            width={960}
+            height={540}
+            className="absolute inset-0 h-full w-full object-cover"
+            fetchPriority="high"
+          />
+        </picture>
+        {video ? <VideoLoop video={video} poster="nenhum" className="absolute inset-0 h-full w-full object-cover" /> : null}
         <div className="absolute inset-0 bg-gradient-to-r from-marca-950 via-marca-950/85 to-marca-950/30" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-marca-950 to-transparent" />
       </div>
 
-      <div className="secao grid min-h-[88vh] items-end gap-12 pb-14 pt-24 sm:pb-20 lg:grid-cols-12 lg:items-center lg:pt-28">
+      <div className="secao grid min-h-[88vh] items-end gap-12 pb-14 pt-24 sm:pb-20 lg:grid-cols-12 lg:items-center lg:pt-28 max-[480px]:min-h-0 max-[480px]:gap-8 max-[480px]:pb-10 max-[480px]:pt-10">
         <div className="min-w-0 lg:col-span-7">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-marca-200 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-[#5fd0a0]" aria-hidden="true" />
@@ -42,12 +68,12 @@ export default function HeroV2() {
             <span className="text-marca-200">com a casa pronta antes do check-in.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/80 max-[480px]:mt-4 max-[480px]:text-base max-[480px]:leading-7">
             Para gestoras de alojamento local e imobiliárias. A mesma equipa em todas as casas,
             preço fechado por imóvel e relatório com fotografias depois de cada limpeza.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row max-[480px]:mt-7">
             <Link
               href="/limpeza-alojamento-local-lisboa#proposta"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-base font-semibold text-marca-950 shadow-[0_10px_40px_-10px_rgba(142,195,218,0.7)] transition hover:bg-marca-50"
