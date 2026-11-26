@@ -48,6 +48,7 @@ const HUB = { slug: "limpeza-alojamento-local-lisboa", rotulo: "Alojamento local
 
 // Grupo do vídeo de cada página: bairros, concelhos, alojamento local, serviços e perfis.
 function grupoVideo(pagina) {
+  if (pagina.video) return pagina.video;
   if (pagina.grupo === "bairro") return "bairros";
   if (pagina.grupo === "area") return "concelhos";
   if (pagina.grupo === "perfil") return "perfis";
@@ -88,8 +89,9 @@ function jsonLd(pagina, caminho) {
         serviceType: pagina.servicoTipo,
         description: pagina.resposta,
         provider: { "@id": negocio["@id"] },
-        areaServed:
-          pagina.grupo === "bairro"
+        areaServed: pagina.areas
+          ? pagina.areas.map((name) => ({ "@type": "City", name }))
+          : pagina.grupo === "bairro"
             ? {
                 "@type": "Place",
                 name: pagina.local,
