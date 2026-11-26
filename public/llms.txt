@@ -70,6 +70,14 @@
 - [Limpeza para gestores de alojamento local](https://marycleans.vercel.app/limpeza-para-gestores-de-alojamento-local): preço por imóvel, lista por casa, relatório fotográfico e calendário fixo.
 - [Mediação imobiliária](https://marycleans.vercel.app/servicos/imobiliarias): casa pronta para visita e entrega de chaves.
 
+## Artigos para quem gere imóveis
+
+- [Relatório fotográfico da limpeza no alojamento local](https://marycleans.vercel.app/blog/relatorio-fotografico-limpeza-alojamento-local): o que deve mostrar e como ajuda numa reclamação.
+- [Objetos esquecidos e danos no alojamento local](https://marycleans.vercel.app/blog/objetos-esquecidos-e-danos-alojamento-local): o que a equipa de limpeza regista e o que pede aviso imediato.
+- [Alojamento local na época baixa](https://marycleans.vercel.app/blog/limpeza-alojamento-local-epoca-baixa): limpeza profunda, casa fechada e preparação da época alta.
+- [Mudar de empresa de limpeza no alojamento local](https://marycleans.vercel.app/blog/mudar-de-empresa-de-limpeza-alojamento-local): passagem por fases sem falhar rotações.
+- [Imóveis vazios na carteira da imobiliária](https://marycleans.vercel.app/blog/limpeza-imoveis-vazios-imobiliaria): quando limpar e como organizar vários imóveis.
+
 ## Mais
 
 - [Serviços e âmbito de cada um](https://marycleans.vercel.app/servicos)

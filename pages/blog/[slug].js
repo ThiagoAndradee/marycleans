@@ -49,6 +49,16 @@ export default function Post({ post, outros, servicos = [] }) {
       inLanguage: "pt-PT",
       mainEntityOfPage: url,
       url,
+      ...(post.imagem
+        ? {
+            image: {
+              "@type": "ImageObject",
+              url: SITE + post.imagem.src,
+              width: post.imagem.largura,
+              height: post.imagem.altura,
+            },
+          }
+        : {}),
       author: { "@type": "Organization", name: EMPRESA.nome, url: SITE },
       publisher: { "@type": "Organization", name: EMPRESA.nome, url: SITE },
     },
@@ -95,6 +105,19 @@ export default function Post({ post, outros, servicos = [] }) {
         </header>
 
         <div className="secao secao-espaco">
+          {post.imagem ? (
+            <figure className="mb-10 max-w-leitura">
+              <img
+                src={post.imagem.src}
+                alt={post.imagem.alt}
+                width={post.imagem.largura}
+                height={post.imagem.altura}
+                className="h-auto w-full rounded-lg"
+                loading="eager"
+              />
+              <figcaption className="mt-2 text-xs text-tinta-500">Imagem ilustrativa.</figcaption>
+            </figure>
+          ) : null}
           <div className="prosa max-w-leitura">
             {post.corpo.map((b, i) => (
               <Bloco key={i} b={b} />
