@@ -73,7 +73,7 @@ export default function AntesDepois() {
             <div className="overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_120px_-30px_rgba(43,142,180,0.45)]">
               <img
                 src="/media/equipa.jpg"
-                alt="Duas profissionais de uniforme Mary Cleans a limpar a cozinha de um alojamento local"
+                alt="Duas profissionais de uniforme Mary Cleans a limpar a cozinha de um alojamento local em Lisboa"
                 className="aspect-[16/9] w-full object-cover"
                 loading="lazy"
               />
