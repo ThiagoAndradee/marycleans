@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Pagina from "./Pagina";
 import FormProposta from "./FormProposta";
+import { PromoCartao } from "./PromoFaixa";
 import TextoComLinks, { semLinks } from "./blog/TextoComLinks";
 import { SITE, negocioJsonLd } from "./Seo";
 import { EMPRESA, SERVICOS, WHATSAPP } from "../lib/negocio";
@@ -174,6 +175,7 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
               WhatsApp {EMPRESA.telefone}
             </a>
           </div>
+          <PromoCartao claro />
         </div>
       </section>
 

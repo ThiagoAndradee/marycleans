@@ -8,6 +8,8 @@ import {
   EMPRESA,
   WHATSAPP,
 } from "../lib/negocio";
+import { PROMO, promoAtiva } from "../lib/promo";
+import { PromoNota, usePromo } from "./PromoFaixa";
 
 const CAMPOS_VAZIOS = {
   nome: "",
@@ -36,6 +38,7 @@ function resumoTexto(d) {
     `Frequência: ${d.frequencia}`,
     Number(d.quantosImoveis) > 1 ? `Número de imóveis: ${d.quantosImoveis}` : null,
     d.mensagem ? `Observações: ${d.mensagem}` : null,
+    d.promo ? `Promoção: ${PROMO.resumo}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -43,6 +46,7 @@ function resumoTexto(d) {
 
 export default function FormOrcamento({ servicoInicial, compacto = false }) {
   const router = useRouter();
+  const promo = usePromo();
   const [dados, setDados] = useState({
     ...CAMPOS_VAZIOS,
     servico: servicoInicial || "",
@@ -83,12 +87,12 @@ export default function FormOrcamento({ servicoInicial, compacto = false }) {
       const resposta = await fetch("/api/orcamento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados),
+        body: JSON.stringify({ ...dados, promo: promoAtiva() ? PROMO.codigo : "" }),
       });
       const corpo = await resposta.json();
       if (!resposta.ok) throw new Error(corpo.erro || "Não foi possível enviar o pedido.");
       if (corpo.viaWhatsApp) {
-        window.open(WHATSAPP(resumoTexto(dados)), "_blank", "noopener");
+        window.open(WHATSAPP(resumoTexto({ ...dados, promo: promoAtiva() ? PROMO.codigo : "" })), "_blank", "noopener");
       }
       router.push("/obrigado");
     } catch (erro) {
@@ -275,6 +279,9 @@ export default function FormOrcamento({ servicoInicial, compacto = false }) {
           </p>
         </div>
       ) : null}
+
+      {promo ? <input type="hidden" name="promo" value={PROMO.codigo} className="promo-bf" /> : null}
+      <PromoNota />
 
       <div className="mt-7 flex flex-wrap items-center gap-4">
         <button type="submit" className="botao" disabled={enviando}>

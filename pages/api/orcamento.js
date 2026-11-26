@@ -33,6 +33,7 @@ export default async function handler(req, res) {
     frequencia: String(dados.frequencia).slice(0, 60),
     quantosImoveis: Number(dados.quantosImoveis) || 1,
     mensagem: dados.mensagem ? String(dados.mensagem).slice(0, 2000) : null,
+    promo: dados.promo === "BLACKFRIDAY" && Date.now() < Date.parse("2026-12-01T00:00:00Z") ? "BLACKFRIDAY" : null,
   };
 
   const destino = process.env.ORCAMENTO_EMAIL_DESTINO;

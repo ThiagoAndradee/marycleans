@@ -1,6 +1,7 @@
 import Cabecalho from "./Cabecalho";
 import Footer from "./Footer";
 import BotaoWhatsApp from "./BotaoWhatsApp";
+import PromoFaixa from "./PromoFaixa";
 import Seo, { negocioJsonLd } from "./Seo";
 
 export default function Pagina({ titulo, descricao, caminho, jsonLd, children }) {
@@ -18,6 +19,7 @@ export default function Pagina({ titulo, descricao, caminho, jsonLd, children })
       >
         Saltar para o conteúdo
       </a>
+      <PromoFaixa />
       <Cabecalho />
       <main id="conteudo">{children}</main>
       <Footer />

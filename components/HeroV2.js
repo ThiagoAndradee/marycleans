@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { EMPRESA, WHATSAPP } from "../lib/negocio";
+import { PromoCartao } from "./PromoFaixa";
 
 // Hero com vídeo. O vídeo e as imagens foram gerados por IA e dizem-no na própria página
 // ("imagens ilustrativas"). Quando houver vídeo real de uma limpeza, troca-se o ficheiro
@@ -87,6 +88,7 @@ export default function HeroV2() {
               WhatsApp {EMPRESA.telefone}
             </a>
           </div>
+          <PromoCartao />
         </div>
 
         {/* Cartões grandes com o que a empresa pequena consegue prometer */}

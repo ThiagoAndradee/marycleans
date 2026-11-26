@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { EMPRESA, FREQUENCIAS, WHATSAPP } from "../lib/negocio";
+import { PROMO, promoAtiva } from "../lib/promo";
+import { PromoNota, usePromo } from "./PromoFaixa";
 
 // Formulário curto de proposta para empresas (gestoras de alojamento local, imobiliárias).
 //
@@ -18,6 +20,7 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
   const [pronto, setPronto] = useState(false); // false | "enviado" | "falhou"
   const [enviando, setEnviando] = useState(false);
   const [mel, setMel] = useState("");
+  const promo = usePromo();
 
   const mudar = (campo) => (e) => {
     setD((v) => ({ ...v, [campo]: e.target.value }));
@@ -31,7 +34,8 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
     `Freguesia ou zona: ${d.zona}`,
     `Frequência: ${d.frequencia}`,
     `Contacto: ${d.contacto}`,
-  ].join("\n");
+    promoAtiva() ? `Promoção: ${PROMO.resumo}` : null,
+  ].filter(Boolean).join("\n");
 
   const enviar = async (e) => {
     e.preventDefault();
@@ -52,7 +56,7 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: `Pedido de proposta: ${d.empresa} (${d.zona})`,
+          _subject: `${promoAtiva() ? "[Black Friday] " : ""}Pedido de proposta: ${d.empresa} (${d.zona})`,
           _template: "table",
           _captcha: "false",
           Empresa: d.empresa,
@@ -62,6 +66,7 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
           Contacto: d.contacto,
           Serviço: servico,
           Página: window.location.pathname,
+          ...(promoAtiva() ? { promo: PROMO.codigo, Promoção: PROMO.resumo } : {}),
         }),
       });
       const j = await r.json().catch(() => ({}));
@@ -164,6 +169,8 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
           })}
         </div>
       </div>
+      {promo ? <input type="hidden" name="promo" value={PROMO.codigo} className="promo-bf" /> : null}
+      <PromoNota />
       <div className="mt-6 flex flex-wrap items-center gap-4">
         <button type="submit" className="botao" disabled={enviando}>
           {enviando ? "A enviar..." : "Pedir proposta"}
