@@ -1,9 +1,13 @@
 import PaginaSeo from "../components/PaginaSeo";
-import { PAGINAS_SEO, paginaSeoPorSlug } from "../lib/seo-paginas";
+import { PAGINAS_SEO } from "../lib/seo-paginas";
+import { PAGINAS_ZONAS } from "../lib/seo-paginas-zonas";
 import { POSTS } from "../lib/blog";
 
 // Uma rota para todas as páginas de serviço por zona (lib/seo-paginas.js).
 // As rotas fixas (/contacto, /servicos, /blog...) têm precedência sobre esta.
+// Junta as duas levas de páginas de zona (lib/seo-paginas.js e lib/seo-paginas-zonas.js).
+const TODAS = [...PAGINAS_SEO, ...PAGINAS_ZONAS];
+const paginaSeoPorSlug = (slug) => TODAS.find((p) => p.slug === slug);
 
 export default function Seo(props) {
   return <PaginaSeo {...props} />;
@@ -11,7 +15,7 @@ export default function Seo(props) {
 
 export function getStaticPaths() {
   return {
-    paths: PAGINAS_SEO.map((p) => ({ params: { seo: p.slug } })),
+    paths: TODAS.map((p) => ({ params: { seo: p.slug } })),
     fallback: false,
   };
 }

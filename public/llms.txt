@@ -26,6 +26,33 @@
 - [Santos, Lapa e Madragoa](https://marycleans.vercel.app/limpeza-alojamento-local-santos-lapa-madragoa)
 - [Príncipe Real e Avenida da Liberdade](https://marycleans.vercel.app/limpeza-alojamento-local-principe-real-avenida)
 - [Avenidas Novas e Saldanha](https://marycleans.vercel.app/limpeza-alojamento-local-avenidas-novas)
+- [Alcântara e Santo Amaro](https://marycleans.vercel.app/limpeza-alojamento-local-alcantara)
+- [Campolide e Amoreiras](https://marycleans.vercel.app/limpeza-alojamento-local-campolide-amoreiras)
+- [Alvalade e Avenida de Roma](https://marycleans.vercel.app/limpeza-alojamento-local-alvalade-roma)
+- [Penha de França](https://marycleans.vercel.app/limpeza-alojamento-local-penha-de-franca)
+- [Benfica e São Domingos de Benfica](https://marycleans.vercel.app/limpeza-alojamento-local-benfica)
+- [Marvila, Beato e Xabregas](https://marycleans.vercel.app/limpeza-alojamento-local-marvila-beato)
+- [Olivais e zona do aeroporto](https://marycleans.vercel.app/limpeza-alojamento-local-olivais-aeroporto)
+- [Lumiar e Telheiras](https://marycleans.vercel.app/limpeza-alojamento-local-lumiar-telheiras)
+- [Guincho e Malveira da Serra, Cascais](https://marycleans.vercel.app/limpeza-alojamento-local-guincho-malveira-cascais)
+- [Todas as zonas](https://marycleans.vercel.app/zonas): concelho a concelho, com as freguesias atendidas.
+
+## Guias para anfitriões de alojamento local
+
+- [Todos os guias](https://marycleans.vercel.app/guias)
+- [Regras do alojamento local em Portugal](https://marycleans.vercel.app/guias/regras-alojamento-local-portugal)
+- [Vistoria ao alojamento local](https://marycleans.vercel.app/guias/vistoria-alojamento-local)
+- [Obrigações de limpeza no alojamento local](https://marycleans.vercel.app/guias/obrigacoes-limpeza-alojamento-local)
+- [Preparar a casa para o primeiro hóspede](https://marycleans.vercel.app/guias/preparar-alojamento-local-primeiro-hospede)
+- [Roupa de cama e toalhas no alojamento local](https://marycleans.vercel.app/guias/roupa-de-cama-alojamento-local)
+- [Nota de limpeza no Airbnb e no Booking](https://marycleans.vercel.app/guias/nota-limpeza-airbnb-booking)
+- [Horário de check-out e check-in](https://marycleans.vercel.app/guias/horario-check-out-check-in-limpeza)
+- [Acesso ao imóvel: chaves, cofres e fechaduras](https://marycleans.vercel.app/guias/acesso-imovel-chaves-cofre-limpeza)
+- [Manual da casa para a limpeza](https://marycleans.vercel.app/guias/manual-do-imovel-para-a-limpeza)
+- [Lixo e reciclagem no alojamento local em Lisboa](https://marycleans.vercel.app/guias/lixo-reciclagem-alojamento-local-lisboa)
+- [Humidade e bolor no alojamento local](https://marycleans.vercel.app/guias/humidade-bolor-alojamento-local)
+- [Percevejos no alojamento local](https://marycleans.vercel.app/guias/percevejos-alojamento-local)
+- [Perguntas frequentes](https://marycleans.vercel.app/perguntas-frequentes)
 
 ## Sintra, Cascais, Oeiras e Amadora
 

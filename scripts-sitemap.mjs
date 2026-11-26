@@ -25,6 +25,14 @@ const rotas = [
   ...[...readFileSync("./lib/seo-paginas.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)].map(
     (m) => `/${m[1]}`
   ),
+  // Segunda leva de zonas, hubs, guias e perguntas frequentes (26/11/2026).
+  ...[...readFileSync("./lib/seo-paginas-zonas.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)].map(
+    (m) => `/${m[1]}`
+  ),
+  "/zonas",
+  "/guias",
+  ...[...readFileSync("./lib/guias.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)].map((m) => `/guias/${m[1]}`),
+  "/perguntas-frequentes",
   "/blog",
   ...[...readFileSync("./lib/blog.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)].map(
     (m) => `/blog/${m[1]}`
@@ -40,6 +48,17 @@ const noConteudo = [...readFileSync("./lib/seo-paginas.js", "utf8").matchAll(/^ 
 if (noIndice !== noConteudo) {
   throw new Error("lib/seo-indice.js e lib/seo-paginas.js têm slugs diferentes");
 }
+
+const zonasIndice = [...readFileSync("./lib/seo-indice-zonas.js", "utf8").matchAll(/slug:\s*"([^"]+)"/g)]
+  .map((m) => m[1])
+  .join();
+const zonasConteudo = [...readFileSync("./lib/seo-paginas-zonas.js", "utf8").matchAll(/^    slug:\s*"([^"]+)"/gm)]
+  .map((m) => m[1])
+  .join();
+if (zonasIndice !== zonasConteudo) {
+  throw new Error("lib/seo-indice-zonas.js e lib/seo-paginas-zonas.js têm slugs diferentes");
+}
+if (new Set(rotas).size !== rotas.length) throw new Error("rota repetida no sitemap");
 
 const hoje = new Date().toISOString().slice(0, 10);
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -98,7 +117,7 @@ if (llmsNovo !== llms) writeFileSync("./public/llms.txt", llmsNovo);
 // ainda não foi publicada (evita 404 interno).
 writeFileSync("./lib/rotas.json", JSON.stringify(rotas, null, 0) + "\n");
 
-const textos = ["./lib/seo-paginas.js", "./lib/blog.js"].map((f) => [f, readFileSync(f, "utf8")]);
+const textos = ["./lib/seo-paginas.js", "./lib/blog.js", "./lib/seo-paginas-zonas.js", "./lib/guias.js"].map((f) => [f, readFileSync(f, "utf8")]);
 for (const [f, t] of textos) {
   for (const m of t.matchAll(/\]\((\/[^)#?]*)/g)) {
     const r = m[1].replace(/\/+$/, "") || "/";

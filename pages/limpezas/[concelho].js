@@ -3,6 +3,7 @@ import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
 import { CONCELHOS, VERTICAIS, SERVICOS, EMPRESA } from "../../lib/negocio";
 import { PAGINAS_SEO } from "../../lib/seo-paginas";
+import { PAGINAS_ZONAS } from "../../lib/seo-paginas-zonas";
 import BlocoVideo from "../../components/BlocoVideo";
 
 export default function Concelho({ concelho, outros, guias }) {
@@ -131,7 +132,9 @@ export default function Concelho({ concelho, outros, guias }) {
           <FormOrcamento compacto />
 
           <div className="mt-12 border-t border-tinta-200 pt-8">
-            <h2 className="text-etiqueta uppercase text-tinta-500">Outras áreas</h2>
+            <h2 className="text-etiqueta uppercase text-tinta-500">
+              Outras áreas · <Link href="/zonas" className="underline underline-offset-2 hover:text-tinta-800">todas as zonas</Link>
+            </h2>
             <ul className="mt-4 flex flex-wrap gap-3">
               {outros.map((c) => (
                 <li key={c.slug}>
@@ -164,7 +167,7 @@ export function getStaticProps({ params }) {
   return {
     props: {
       concelho,
-      guias: PAGINAS_SEO.filter((p) =>
+      guias: [...PAGINAS_SEO, ...PAGINAS_ZONAS].filter((p) =>
         concelho.slug === "lisboa"
           ? p.grupo !== "area"
           : p.slug.endsWith(`-${concelho.slug}`)
