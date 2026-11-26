@@ -24,6 +24,8 @@ Chaves (Redis `admin:<site>:...`, ou Blob `admin/...`): `crm/leads.json` (gzip n
 - Tirar alguém: `remover` e `publicar` de novo. A pessoa perde o acesso no próximo deploy, mesmo com sessão aberta.
 - Derrubar todas as sessões: `node scripts/admin-usuarios.mjs girar-sessoes`, publique e faça deploy.
 
+- `ADMIN_PRODUCAO=1` (só em Production, depois do ok do Thiago): sem ela, em produção as rotas do admin dão 404 e o formulário não grava lead. Um deploy de produção por engano não liga o CRM.
+
 ## Proteger uma rota nova (ex.: Analytics)
 
 ```js
