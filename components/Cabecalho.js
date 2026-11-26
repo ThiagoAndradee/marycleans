@@ -7,7 +7,7 @@ import { EMPRESA, VERTICAIS } from "../lib/negocio";
 const LINKS = [
   ...VERTICAIS.map((v) => ({ nome: v.nome, href: `/servicos/${v.slug}` })),
   { nome: "Serviços", href: "/servicos" },
-  { nome: "Áreas", href: "/limpezas/sintra" },
+  { nome: "Zonas", href: "/zonas" },
   { nome: "Blog", href: "/blog" },
   { nome: "Contacto", href: "/contacto" },
 ];
