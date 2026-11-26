@@ -19,8 +19,12 @@ const siteJsonLd = {
 };
 
 export default function Seo({ titulo, descricao, caminho = "/", jsonLd, noindex = false }) {
+  // O Google corta o título perto dos 60 caracteres: a marca só entra no fim se couber.
+  const comMarca = `${titulo} | ${EMPRESA.nome}`;
   const tituloCompleto = titulo
-    ? `${titulo} | ${EMPRESA.nome}`
+    ? comMarca.length <= 60
+      ? comMarca
+      : titulo
     : `${EMPRESA.nome} | Serviços de limpeza em Lisboa, Sintra e Cascais`;
 
   return (
