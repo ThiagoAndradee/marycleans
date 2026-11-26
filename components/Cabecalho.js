@@ -16,7 +16,7 @@ export default function Cabecalho() {
   const [aberto, setAberto] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-marca-950/90 text-white backdrop-blur-md">
+    <header className="sticky top-0 z-30 print:hidden border-b border-white/10 bg-marca-950/90 text-white backdrop-blur-md">
       <div className="secao flex h-20 items-center justify-between gap-6">
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={EMPRESA.nome}>
           <img src={logo.src} alt="" className="h-11 w-11 rounded-xl bg-white p-0.5" />

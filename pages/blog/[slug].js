@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import TextoComLinks, { semLinks } from "../../components/blog/TextoComLinks";
+import Bloco from "../../components/blog/Bloco";
+import ChecklistModelo from "../../components/blog/ChecklistModelo";
 import { POSTS, postPorSlug } from "../../lib/blog";
 import { EMPRESA, WHATSAPP } from "../../lib/negocio";
 import { paginasQueCitamPost } from "../../lib/seo-paginas";
@@ -14,28 +16,6 @@ const dataPT = (iso) =>
     year: "numeric",
   });
 
-function Bloco({ b }) {
-  if (b.t === "h2")
-    return <h2 className="mt-12 text-titulo-2 text-tinta-900">{b.x}</h2>;
-  if (b.t === "h3")
-    return <h3 className="mt-8 text-titulo-3 text-tinta-900">{b.x}</h3>;
-  if (b.t === "lista")
-    return (
-      <ul className="mt-4 max-w-leitura list-disc space-y-2 pl-5 text-tinta-600 marker:text-marca-600">
-        {b.x.map((item) => (
-          <li key={item} className="leading-7">
-            <TextoComLinks texto={item} />
-          </li>
-        ))}
-      </ul>
-    );
-  return (
-    <p className="mt-4 leading-7">
-      <TextoComLinks texto={b.x} />
-    </p>
-  );
-}
-
 export default function Post({ post, outros, servicos = [] }) {
   const url = `${SITE}/blog/${post.slug}`;
   const jsonLd = [
@@ -45,7 +25,7 @@ export default function Post({ post, outros, servicos = [] }) {
       headline: post.titulo,
       description: post.descricao,
       datePublished: post.data,
-      dateModified: post.data,
+      dateModified: post.atualizado || post.data,
       inLanguage: "pt-PT",
       mainEntityOfPage: url,
       url,
@@ -71,6 +51,42 @@ export default function Post({ post, outros, servicos = [] }) {
       ],
     },
   ];
+
+  // Post em formato de modelo: os passos da checklist também vão como HowTo.
+  if (post.modelo) {
+    jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: post.titulo,
+      description: post.descricao,
+      inLanguage: "pt-PT",
+      url: `${url}#lista`,
+      step: post.modelo.areas.map((a, n) => ({
+        "@type": "HowToSection",
+        name: a.titulo,
+        position: n + 1,
+        itemListElement: a.itens.map((it, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          text: it.x,
+          url: `${url}#${a.id}`,
+        })),
+      })),
+    });
+  }
+
+  if (post.modelo) {
+    return (
+      <Pagina
+        titulo={post.titulo}
+        descricao={post.descricao}
+        caminho={`/blog/${post.slug}`}
+        jsonLd={jsonLd}
+      >
+        <ChecklistModelo post={post} dataPT={dataPT} outros={outros} servicos={servicos} />
+      </Pagina>
+    );
+  }
 
   return (
     <Pagina

@@ -16,7 +16,7 @@ export default function PromoFaixa() {
   const ativa = usePromo();
   if (!ativa) return null;
   return (
-    <div className="promo-bf relative z-40 border-b border-white/10 bg-marca-950 text-white">
+    <div className="promo-bf relative z-40 print:hidden border-b border-white/10 bg-marca-950 text-white">
       <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#5fd0a0] via-marca-400 to-marca-700" aria-hidden="true" />
       <div className="secao flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 py-2.5 text-center text-sm">
         <span className="rounded-md bg-[#5fd0a0] px-2 py-1 text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-marca-950">

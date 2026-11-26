@@ -9,7 +9,7 @@ export default function BotaoWhatsApp() {
       href={WHATSAPP(MENSAGEM)}
       target="_blank"
       rel="noreferrer noopener"
-      className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-tinta-300 bg-white px-4 py-2.5 text-sm font-semibold text-tinta-800 shadow-sm transition-colors hover:border-tinta-400 hover:bg-tinta-50"
+      className="fixed bottom-5 right-5 z-40 print:hidden inline-flex items-center gap-2 rounded-full border border-tinta-300 bg-white px-4 py-2.5 text-sm font-semibold text-tinta-800 shadow-sm transition-colors hover:border-tinta-400 hover:bg-tinta-50"
       aria-label={`Falar por WhatsApp para ${EMPRESA.telefone}`}
     >
       <svg

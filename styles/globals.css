@@ -81,3 +81,26 @@
     @apply max-w-leitura text-tinta-600;
   }
 }
+
+/* Folha A4 da checklist (e de qualquer página impressa): sem menus, margens de papel. */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 12mm 12mm;
+  }
+
+  html,
+  body {
+    background: #fff;
+    font-size: 10pt;
+  }
+
+  .checklist-area {
+    break-inside: avoid;
+  }
+
+  input[type="checkbox"] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
