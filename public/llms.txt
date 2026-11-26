@@ -13,6 +13,9 @@
 - [Limpeza profunda em Lisboa](https://marycleans.vercel.app/limpeza-profunda-lisboa): interior de armários e electrodomésticos, juntas, rodapés e vidros.
 - [Limpeza regular de casa em Lisboa](https://marycleans.vercel.app/limpeza-de-manutencao-lisboa): semanal, quinzenal ou mensal, com a mesma equipa.
 - [Limpeza de fim de arrendamento](https://marycleans.vercel.app/limpeza-fim-de-arrendamento-lisboa): casa vazia limpa a fundo, com registo fotográfico para a vistoria.
+- [Limpeza entre hóspedes: check-out e check-in](https://marycleans.vercel.app/limpeza-entre-hospedes-alojamento-local): a janela entre a saída e a entrada, o que se faz e o relatório antes do check-in.
+- [Reposição de amenities no alojamento local](https://marycleans.vercel.app/reposicao-amenities-alojamento-local): lista por casa, stock do imóvel ou produto cobrado a custo.
+- [Casas no centro histórico de Lisboa](https://marycleans.vercel.app/empresa-de-limpeza-centro-historico-lisboa): prédios pombalinos, soalho antigo e escadas sem elevador, para habitação, arrendamento e venda.
 
 ## Alojamento local por bairro de Lisboa
 
@@ -37,6 +40,14 @@
 - [Empresa de limpeza em Cascais](https://marycleans.vercel.app/empresa-de-limpeza-cascais)
 - [Empresa de limpeza em Oeiras](https://marycleans.vercel.app/empresa-de-limpeza-oeiras)
 - [Empresa de limpeza na Amadora](https://marycleans.vercel.app/empresa-de-limpeza-amadora)
+
+## Por tipo de imóvel
+
+- [Limpeza de T0 e estúdio](https://marycleans.vercel.app/limpeza-apartamento-t0-lisboa): tudo numa divisão, casa de banho sem janela e pouca arrumação.
+- [Limpeza de T1](https://marycleans.vercel.app/limpeza-apartamento-t1-lisboa): quarto, sala com sofá-cama e uma casa de banho.
+- [Limpeza de T2](https://marycleans.vercel.app/limpeza-apartamento-t2-lisboa): dois quartos, mais camas e equipa que divide a casa.
+- [Limpeza de T3](https://marycleans.vercel.app/limpeza-apartamento-t3-lisboa): casa de família, mais armários e duas casas de banho.
+- [Limpeza de moradias](https://marycleans.vercel.app/limpeza-de-moradias-cascais-sintra): vários pisos, areia e salitre na linha, humidade em Sintra.
 
 ## Para quem gere imóveis
 
