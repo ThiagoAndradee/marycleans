@@ -1,4 +1,5 @@
-// Gera public/sitemap.xml a partir de lib/negocio.js. Roda no prebuild.
+// Gera public/sitemap.xml, public/robots.txt, lib/rotas.json e acerta o domínio do
+// public/llms.txt. Roda no prebuild.
 import { writeFileSync } from "node:fs";
 import { readFileSync } from "node:fs";
 
@@ -11,7 +12,8 @@ const slugs = (nomeArray) => {
   );
 };
 
-const SITE = "https://www.marycleans.pt";
+// Mesma regra de lib/site.js (aqui não dá para importar, o ficheiro não é ESM).
+const SITE = (process.env.NEXT_PUBLIC_SITE_URL || "https://marycleans.vercel.app").replace(/\/+$/, "");
 const rotas = [
   "/",
   "/servicos",
@@ -53,4 +55,26 @@ ${rotas
 </urlset>
 `;
 writeFileSync("./public/sitemap.xml", xml);
-console.log(`sitemap.xml: ${rotas.length} rotas`);
+console.log(`sitemap.xml: ${rotas.length} rotas em ${SITE}`);
+
+writeFileSync(
+  "./public/robots.txt",
+  `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE}/sitemap.xml\n`
+);
+
+// llms.txt é escrito à mão; aqui só se troca o domínio de todos os links para o atual.
+const llms = readFileSync("./public/llms.txt", "utf8");
+const llmsNovo = llms.replace(/https:\/\/(?:www\.marycleans\.pt|marycleans\.vercel\.app)/g, SITE);
+if (llmsNovo !== llms) writeFileSync("./public/llms.txt", llmsNovo);
+
+// Rotas que existem. TextoComLinks usa esta lista para não gerar link para página que
+// ainda não foi publicada (evita 404 interno).
+writeFileSync("./lib/rotas.json", JSON.stringify(rotas, null, 0) + "\n");
+
+const textos = ["./lib/seo-paginas.js", "./lib/blog.js"].map((f) => [f, readFileSync(f, "utf8")]);
+for (const [f, t] of textos) {
+  for (const m of t.matchAll(/\]\((\/[^)#?]*)/g)) {
+    const r = m[1].replace(/\/+$/, "") || "/";
+    if (r !== "/caminho" && !rotas.includes(r)) console.warn(`aviso: ${f} cita ${r}, que não existe (vai como texto, sem link)`);
+  }
+}

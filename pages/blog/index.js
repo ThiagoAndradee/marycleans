@@ -2,7 +2,7 @@ import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import { POSTS } from "../../lib/blog";
 
-const SITE = "https://www.marycleans.pt";
+import { SITE } from "../../lib/site";
 
 const dataPT = (iso) =>
   new Date(`${iso}T12:00:00Z`).toLocaleDateString("pt-PT", {
