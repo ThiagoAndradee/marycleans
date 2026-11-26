@@ -10,6 +10,7 @@ export default function Obrigado() {
       titulo="Pedido recebido"
       descricao="O pedido de orcamento foi recebido. Respondemos em 24 horas."
       caminho="/obrigado"
+      noindex
     >
       <section className="secao py-20 sm:py-28">
         <p className="etiqueta-secao">Pedido recebido</p>

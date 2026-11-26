@@ -4,13 +4,14 @@ import BotaoWhatsApp from "./BotaoWhatsApp";
 import PromoFaixa from "./PromoFaixa";
 import Seo, { negocioJsonLd } from "./Seo";
 
-export default function Pagina({ titulo, descricao, caminho, jsonLd, children }) {
+export default function Pagina({ titulo, descricao, caminho, jsonLd, noindex, children }) {
   return (
     <>
       <Seo
         titulo={titulo}
         descricao={descricao}
         caminho={caminho}
+        noindex={noindex}
         jsonLd={jsonLd || negocioJsonLd}
       />
       <a

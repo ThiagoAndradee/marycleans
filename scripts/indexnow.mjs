@@ -3,7 +3,7 @@
 // Uso: node scripts/indexnow.mjs
 import { readFileSync } from "node:fs";
 
-const KEY = "5e8b2c71d94f4a0c8f63b1e7a2d95c40";
+const KEY = "c11fe9f00c3c2767e898d966f98d5217";
 const xml = readFileSync("./public/sitemap.xml", "utf8");
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 const host = new URL(urls[0]).host;

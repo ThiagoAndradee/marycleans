@@ -5,7 +5,7 @@ import { POSTS, postPorSlug } from "../../lib/blog";
 import { EMPRESA, WHATSAPP } from "../../lib/negocio";
 import { paginasQueCitamPost } from "../../lib/seo-paginas";
 
-const SITE = "https://www.marycleans.pt";
+import { SITE } from "../../lib/site";
 
 const dataPT = (iso) =>
   new Date(`${iso}T12:00:00Z`).toLocaleDateString("pt-PT", {

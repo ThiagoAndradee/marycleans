@@ -1,4 +1,5 @@
-// Gera public/sitemap.xml a partir de lib/negocio.js. Roda no prebuild.
+// Gera public/sitemap.xml, public/robots.txt, lib/rotas.json e acerta o domínio do
+// public/llms.txt. Roda no prebuild.
 import { writeFileSync } from "node:fs";
 import { readFileSync } from "node:fs";
 
@@ -11,7 +12,8 @@ const slugs = (nomeArray) => {
   );
 };
 
-const SITE = "https://www.marycleans.pt";
+// Mesma regra de lib/site.js (aqui não dá para importar, o ficheiro não é ESM).
+const SITE = (process.env.NEXT_PUBLIC_SITE_URL || "https://marycleans.vercel.app").replace(/\/+$/, "");
 const rotas = [
   "/",
   "/servicos",
@@ -53,4 +55,53 @@ ${rotas
 </urlset>
 `;
 writeFileSync("./public/sitemap.xml", xml);
-console.log(`sitemap.xml: ${rotas.length} rotas`);
+console.log(`sitemap.xml: ${rotas.length} rotas em ${SITE}`);
+
+writeFileSync(
+  "./public/robots.txt",
+  `# Mary Cleans. Site público: pode ler, indexar e citar.
+# Content-Signal: search=yes, ai-input=yes, ai-train=yes
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Robôs de busca e de resposta com IA (liberados de forma explícita)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: ${SITE}/sitemap.xml
+`
+);
+
+// llms.txt é escrito à mão; aqui só se troca o domínio de todos os links para o atual.
+const llms = readFileSync("./public/llms.txt", "utf8");
+const llmsNovo = llms.replace(/https:\/\/(?:www\.marycleans\.pt|marycleans\.vercel\.app)/g, SITE);
+if (llmsNovo !== llms) writeFileSync("./public/llms.txt", llmsNovo);
+
+// Rotas que existem. TextoComLinks usa esta lista para não gerar link para página que
+// ainda não foi publicada (evita 404 interno).
+writeFileSync("./lib/rotas.json", JSON.stringify(rotas, null, 0) + "\n");
+
+const textos = ["./lib/seo-paginas.js", "./lib/blog.js"].map((f) => [f, readFileSync(f, "utf8")]);
+for (const [f, t] of textos) {
+  for (const m of t.matchAll(/\]\((\/[^)#?]*)/g)) {
+    const r = m[1].replace(/\/+$/, "") || "/";
+    if (r !== "/caminho" && !rotas.includes(r)) console.warn(`aviso: ${f} cita ${r}, que não existe (vai como texto, sem link)`);
+  }
+}

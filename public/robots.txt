@@ -5,7 +5,6 @@ Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /admin
 Disallow: /api/
-Disallow: /obrigado
 
 # Robôs de busca e de resposta com IA (liberados de forma explícita)
 User-agent: Googlebot
@@ -24,6 +23,5 @@ User-agent: ClaudeBot
 Allow: /
 Disallow: /admin
 Disallow: /api/
-Disallow: /obrigado
 
-Sitemap: https://www.marycleans.pt/sitemap.xml
+Sitemap: https://marycleans.vercel.app/sitemap.xml
