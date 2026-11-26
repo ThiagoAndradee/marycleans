@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import VideoLoop from "./VideoLoop";
+import { videoDoGrupo } from "../lib/videos";
 import { EMPRESA, WHATSAPP } from "../lib/negocio";
 import { PromoCartao } from "./PromoFaixa";
 
@@ -8,48 +9,23 @@ import { PromoCartao } from "./PromoFaixa";
 // em public/media/ e o aviso sai.
 
 const FACTOS = [
-  { titulo: "A dona vai a cada limpeza", texto: "A Maria trabalha nas casas. Não manda quem não conhece." },
-  { titulo: "Sempre a mesma dupla", texto: "A casa não roda por pessoas diferentes a cada semana." },
+  { titulo: "Equipa treinada, de uniforme", texto: "Profissionais dedicados, com uma lista própria para cada casa." },
+  { titulo: "Sempre a mesma equipa", texto: "A casa não roda por pessoas diferentes a cada semana." },
   { titulo: "Fotografias no fim", texto: "Cada divisão fotografada, enviadas a si quando a casa fica pronta." },
 ];
 
 const MENSAGEM = "Bom dia. Gostaria de pedir um orçamento de limpeza. O imóvel fica em ";
 
 export default function HeroV2() {
-  const video = useRef(null);
-  const [movimento, setMovimento] = useState(true);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const aplica = () => {
-      setMovimento(!mq.matches);
-      if (mq.matches && video.current) video.current.pause();
-    };
-    aplica();
-    mq.addEventListener("change", aplica);
-    return () => mq.removeEventListener("change", aplica);
-  }, []);
+  const video = videoDoGrupo("home");
 
   return (
     <section className="relative isolate overflow-hidden bg-marca-950 text-white">
       {/* Fundo: vídeo com poster, escurecido para o texto passar 4,5:1 */}
       <div className="absolute inset-0 -z-10">
-        {movimento ? (
-          <video
-            ref={video}
-            className="h-full w-full object-cover"
-            src="/media/hero.mp4"
-            poster="/media/hero.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
-          />
-        ) : (
-          <img src="/media/hero.jpg" alt="" className="h-full w-full object-cover" />
-        )}
+        {/* Poster sempre; o vídeo de empresa só entra no computador e depois da página carregar. */}
+        <img src="/media/hero-empresa.webp" alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
+        {video ? <VideoLoop video={video} className="absolute inset-0 h-full w-full object-cover" /> : null}
         <div className="absolute inset-0 bg-gradient-to-r from-marca-950 via-marca-950/85 to-marca-950/30" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-marca-950 to-transparent" />
       </div>

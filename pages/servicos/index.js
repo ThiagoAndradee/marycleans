@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import { SERVICOS, VERTICAIS, NAO_FAZEMOS } from "../../lib/negocio";
+import BlocoVideo from "../../components/BlocoVideo";
 
 export default function Servicos() {
   return (
@@ -22,6 +23,7 @@ export default function Servicos() {
             </span>
           </p>
         </div>
+        <BlocoVideo grupo="servicos" />
       </section>
 
       <section className="secao secao-espaco">

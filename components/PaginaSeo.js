@@ -6,6 +6,8 @@ import TextoComLinks, { semLinks } from "./blog/TextoComLinks";
 import { SITE, negocioJsonLd } from "./Seo";
 import { EMPRESA, SERVICOS, WHATSAPP } from "../lib/negocio";
 import { SEO_DATA, GRUPOS_SEO } from "../lib/seo-indice";
+import VideoLoop from "./VideoLoop";
+import { videoDoGrupo } from "../lib/videos";
 
 // Página de entrada por serviço e por zona. O conteúdo vem de lib/seo-paginas.js.
 // Ordem pensada para quem chega da pesquisa: resposta curta no topo, depois o que é próprio
@@ -43,6 +45,14 @@ const B2B = [
 ];
 
 const HUB = { slug: "limpeza-alojamento-local-lisboa", rotulo: "Alojamento local em Lisboa" };
+
+// Grupo do vídeo de cada página: bairros, concelhos, alojamento local, serviços e perfis.
+function grupoVideo(pagina) {
+  if (pagina.grupo === "bairro") return "bairros";
+  if (pagina.grupo === "area") return "concelhos";
+  if (pagina.grupo === "perfil") return "perfis";
+  return pagina.slug.startsWith("limpeza-alojamento-local") || pagina.slug.startsWith("contrato-") ? "alojamento" : "servicos";
+}
 
 function migalhas(pagina) {
   const lista = [{ nome: "Início", href: "/" }];
@@ -176,6 +186,12 @@ export default function PaginaSeo({ pagina, relacionadas, posts }) {
             </a>
           </div>
           <PromoCartao claro />
+          {videoDoGrupo(grupoVideo(pagina)) ? (
+            <div className="relative mt-10 aspect-video max-w-3xl overflow-hidden rounded-2xl bg-tinta-100 shadow-sm">
+              <VideoLoop video={videoDoGrupo(grupoVideo(pagina))} className="absolute inset-0 h-full w-full object-cover" />
+              <p className="absolute bottom-2 right-3 text-[11px] text-white/80">Imagem ilustrativa</p>
+            </div>
+          ) : null}
         </div>
       </section>
 

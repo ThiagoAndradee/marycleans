@@ -3,6 +3,7 @@ import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
 import { CONCELHOS, VERTICAIS, SERVICOS, EMPRESA } from "../../lib/negocio";
 import { PAGINAS_SEO } from "../../lib/seo-paginas";
+import BlocoVideo from "../../components/BlocoVideo";
 
 export default function Concelho({ concelho, outros, guias }) {
   const ehBase = concelho.base;
@@ -35,6 +36,7 @@ export default function Concelho({ concelho, outros, guias }) {
             </a>
           </div>
         </div>
+        <BlocoVideo grupo="concelhos" />
       </section>
 
       <section className="secao secao-espaco">

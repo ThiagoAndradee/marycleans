@@ -73,7 +73,7 @@ export default function AntesDepois() {
             <div className="overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_120px_-30px_rgba(43,142,180,0.45)]">
               <img
                 src="/media/equipa.jpg"
-                alt="Duas profissionais de uniforme Mary Cleans a limpar a cozinha de um alojamento local em Lisboa"
+                alt="Profissionais de uniforme Mary Cleans a limpar a cozinha de um alojamento local em Lisboa"
                 className="aspect-[16/9] w-full object-cover"
                 loading="lazy"
               />
@@ -85,7 +85,7 @@ export default function AntesDepois() {
               Quem entra na sua casa
             </p>
             <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-              A dona vai. Com a mesma parceira, de uniforme.
+              Uma equipa treinada, de uniforme, sempre a mesma.
             </h2>
             <p className="mt-4 text-base leading-7 text-white/75">
               Não mandamos pessoas diferentes a cada semana. Quem limpa a sua casa conhece a casa,

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
+import BlocoVideo from "../../components/BlocoVideo";
 
 // A limpeza noturna esta descrita como servico com marcacao previa, nao como
 // disponibilidade permanente, enquanto MC-Q09 nao estiver respondida.
@@ -14,7 +15,7 @@ const ETAPAS = [
   {
     n: "02",
     t: "Limpeza completa",
-    d: "Todas as divisões, cozinha, casas de banho, pavimentos. Em dupla, com divisão de tarefa definida.",
+    d: "Todas as divisões, cozinha, casas de banho, pavimentos. Com divisão de tarefas definida e sempre igual.",
   },
   {
     n: "03",
@@ -67,6 +68,7 @@ export default function AlojamentoLocal() {
             </a>
           </div>
         </div>
+        <BlocoVideo grupo="alojamento" />
       </section>
 
       {/* O diferencial */}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
+import BlocoVideo from "../../components/BlocoVideo";
 
 const MOMENTOS = [
   {
@@ -52,6 +53,7 @@ export default function Imobiliarias() {
             </a>
           </div>
         </div>
+        <BlocoVideo grupo="perfis" />
       </section>
 
       {/* Os três momentos */}

@@ -2,7 +2,7 @@ const RAZOES = [
   {
     titulo: "É sempre a mesma equipa",
     texto:
-      "Trabalhamos em dupla, e é a mesma dupla em todas as visitas. A equipa aprende a casa: onde ficam as chaves, como se fecha o estore, o que o cliente não quer que se mexa. Equipa que roda recomeça do zero em cada visita.",
+      "Os nossos profissionais são dedicados e treinados, e é a mesma equipa em todas as visitas. A equipa aprende a casa: onde ficam as chaves, como se fecha o estore, o que o cliente não quer que se mexa. Equipa que roda recomeça do zero em cada visita.",
   },
   {
     titulo: "A responsável vai",

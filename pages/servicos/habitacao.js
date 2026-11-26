@@ -2,6 +2,7 @@ import Link from "next/link";
 import Pagina from "../../components/Pagina";
 import FormOrcamento from "../../components/FormOrcamento";
 import { SERVICOS } from "../../lib/negocio";
+import BlocoVideo from "../../components/BlocoVideo";
 
 const RELEVANTES = ["limpeza-de-manutencao", "limpeza-profunda", "limpeza-pos-mudanca"];
 
@@ -23,7 +24,7 @@ export default function Habitacao() {
           <p className="prosa mt-6">
             <span className="text-entrada">
               Numa casa habitada, a limpeza é um serviço de confiança antes de ser um serviço
-              de limpeza. Quem entra é sempre a mesma dupla, e o responsável pelo trabalho é
+              de limpeza. Quem entra é sempre a mesma equipa, e o responsável pelo trabalho é
               quem o faz.
             </span>
           </p>
@@ -33,6 +34,7 @@ export default function Habitacao() {
             </Link>
           </div>
         </div>
+        <BlocoVideo grupo="servicos" />
       </section>
 
       <section className="secao secao-espaco">
