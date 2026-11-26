@@ -59,7 +59,7 @@ console.log(`sitemap.xml: ${rotas.length} rotas em ${SITE}`);
 
 writeFileSync(
   "./public/robots.txt",
-  `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE}/sitemap.xml\n`
+  `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\n\nSitemap: ${SITE}/sitemap.xml\n`
 );
 
 // llms.txt é escrito à mão; aqui só se troca o domínio de todos os links para o atual.

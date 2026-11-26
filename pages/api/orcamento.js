@@ -1,3 +1,5 @@
+import crm from "../../lib/admin/crm";
+import site from "../../lib/admin/site";
 
 // Sem ORCAMENTO_EMAIL_DESTINO definido, este endpoint devolve viaWhatsApp: true e o
 // formulario abre o WhatsApp com o pedido montado, em vez de perder o pedido.
@@ -35,6 +37,14 @@ export default async function handler(req, res) {
     mensagem: dados.mensagem ? String(dados.mensagem).slice(0, 2000) : null,
     promo: dados.promo === "BLACKFRIDAY" && Date.now() < Date.parse("2026-12-01T00:00:00Z") ? "BLACKFRIDAY" : null,
   };
+
+  // CRM do /admin: o pedido vira lead (nunca impede a resposta ao cliente).
+  try {
+    const x = site.formParaLead({ ...pedido, form: "orcamento" });
+    await crm.doSite(site, x.campos, x);
+  } catch (e) {
+    console.error("[orcamento] CRM:", e && e.message);
+  }
 
   const destino = process.env.ORCAMENTO_EMAIL_DESTINO;
 

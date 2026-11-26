@@ -38,3 +38,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## /admin: CRM com login (branch admin-crm, 26/11/2026)
+
+`/admin` é o CRM da Mary Cleans: leads, funil, notas, propostas, métricas, importação de CSV, backup e log de acessos. O formulário de proposta (`/api/lead`) e o de orçamento (`/api/orcamento`) criam lead no CRM, além do e-mail/WhatsApp. Login: e-mail da lista + senha + 2FA.
+
+Como funciona, variáveis, checklist de segurança e **como proteger uma rota nova (Analytics)**: `lib/admin/README.md`.
+Quem entra: `node scripts/admin-usuarios.mjs adicionar` e `publicar preview`. Teste: `node scripts/admin-teste-seguranca.mjs <url>`.

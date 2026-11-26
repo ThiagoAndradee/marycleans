@@ -51,6 +51,13 @@ export default function FormProposta({ zonaInicial = "", servico = "" }) {
     if (!ENVIO_LIGADO) return setPronto("falhou");
     if (mel) return setPronto("enviado"); // campo-armadilha preenchido: é um robô
     setEnviando(true);
+    // CRM do /admin: cria o lead em paralelo; se falhar, o e-mail segue na mesma.
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({ form: "proposta", empresa: d.empresa, imoveis: d.imoveis, zona: d.zona, frequencia: d.frequencia, contacto: d.contacto, servico, pagina: window.location.pathname, ...(promoAtiva() ? { promo: PROMO.codigo } : {}) }),
+    }).catch(() => {});
     try {
       const r = await fetch(DESTINO, {
         method: "POST",
