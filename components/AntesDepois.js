@@ -89,7 +89,7 @@ export default function AntesDepois() {
             </h2>
             <p className="mt-4 text-base leading-7 text-white/75">
               Não mandamos pessoas diferentes a cada semana. Quem limpa a sua casa conhece a casa,
-              sabe onde fica cada coisa e tem o número da Maria no telemóvel.
+              sabe onde fica cada coisa e tem o número da Mary no telemóvel.
             </p>
           </div>
         </div>
