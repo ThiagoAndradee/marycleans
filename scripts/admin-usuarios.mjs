@@ -10,12 +10,12 @@
      node scripts/admin-usuarios.mjs publicar production   (só depois do ok para produção)
 
    A lista é UMA para os 3 sites (Want3D, Lacre, Mary Cleans): ~/.config/beabstracto/admin-usuarios.json (chmod 600).
-   Cadastre cada pessoa uma vez (dizendo em quais sites entra: Adonaldo só lacre-cargas, Maria só marycleans)
+   Cadastre cada pessoa uma vez (dizendo em quais sites entra: Adonaldo só lacre-cargas, Mary só marycleans)
    e rode "publicar" dentro da pasta de cada site. Cada site recebe só quem tem acesso a ele. O mesmo código do app autenticador
    vale nos 3. O segredo da sessão é diferente por site (o login de um site não abre o outro).
    Senha: guardada só como hash scrypt. 2FA: o script mostra a chave UMA vez para cadastrar no app autenticador
    (Google Authenticator, 1Password, Microsoft Authenticator: "inserir chave de configuração", tipo baseada em tempo).
-   Para outra pessoa (Adonaldo, Maria): passe a chave e a senha por telefone ou pessoalmente, nunca por e-mail. */
+   Para outra pessoa (Adonaldo, Mary): passe a chave e a senha por telefone ou pessoalmente, nunca por e-mail. */
 import fs from "fs";
 import os from "os";
 import path from "path";
