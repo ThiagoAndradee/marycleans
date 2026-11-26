@@ -10,7 +10,8 @@
      node scripts/admin-usuarios.mjs publicar production   (só depois do ok para produção)
 
    A lista é UMA para os 3 sites (Want3D, Lacre, Mary Cleans): ~/.config/beabstracto/admin-usuarios.json (chmod 600).
-   Cadastre cada pessoa uma vez e rode "publicar" dentro da pasta de cada site. O mesmo código do app autenticador
+   Cadastre cada pessoa uma vez (dizendo em quais sites entra: Adonaldo só lacre-cargas, Maria só marycleans)
+   e rode "publicar" dentro da pasta de cada site. Cada site recebe só quem tem acesso a ele. O mesmo código do app autenticador
    vale nos 3. O segredo da sessão é diferente por site (o login de um site não abre o outro).
    Senha: guardada só como hash scrypt. 2FA: o script mostra a chave UMA vez para cadastrar no app autenticador
    (Google Authenticator, 1Password, Microsoft Authenticator: "inserir chave de configuração", tipo baseada em tempo).
@@ -46,22 +47,25 @@ function pergunta(q, oculto) {
 }
 
 const cmd = process.argv[2];
+const pode = (u) => !u.sites || u.sites.includes("*") || u.sites.includes(projeto);
 const d = ler();
 d.segredos = d.segredos || {};
 if (!d.segredos[projeto]) { d.segredos[projeto] = crypto.randomBytes(48).toString("base64url"); gravar(d); }
 
 if (cmd === "listar") {
-  console.log(`Projeto ${projeto}:`); d.usuarios.forEach((u) => console.log(`- ${u.email} (${u.nome})`));
+  console.log(`Projeto ${projeto}:`); d.usuarios.forEach((u) => console.log(`- ${u.email} (${u.nome}) sites: ${(u.sites || ["*"]).join(", ")}${pode(u) ? "" : "  [sem acesso a este site]"}`));
 } else if (cmd === "adicionar") {
   const email = (await pergunta("E-mail: ")).toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { console.error("E-mail inválido."); process.exit(1); }
   const nome = await pergunta("Nome que aparece no painel: ") || email;
+  const sitesTxt = await pergunta("Em quais sites entra? (want3d-muenchen, lacre-cargas, marycleans; separados por vírgula; Enter = todos): ");
+  const sites = sitesTxt ? sitesTxt.split(",").map((x) => x.trim()).filter(Boolean) : ["*"];
   const s1 = await pergunta("Senha (mínimo 12 caracteres, não aparece na tela): ", true);
   if (s1.length < 12) { console.error("Senha curta. Use pelo menos 12 caracteres."); process.exit(1); }
   const s2 = await pergunta("Repita a senha: ", true);
   if (s1 !== s2) { console.error("As senhas não são iguais."); process.exit(1); }
   const seg = totp.novoSegredo();
-  const u = { email, nome, senha: auth.hashSenha(s1), totp: seg };
+  const u = { email, nome, senha: auth.hashSenha(s1), totp: seg, sites };
   d.usuarios = d.usuarios.filter((x) => x.email !== email).concat(u);
   gravar(d);
   const conta = encodeURIComponent(`Admin Beabstracto:${email}`);
@@ -81,8 +85,10 @@ if (cmd === "listar") {
 } else if (cmd === "publicar") {
   const amb = process.argv[3];
   if (!["preview", "production"].includes(amb)) { console.error("Use: publicar preview  ou  publicar production"); process.exit(1); }
-  if (!d.usuarios.length) { console.error("Lista vazia. Rode 'adicionar' antes."); process.exit(1); }
-  const valores = { ADMIN_USERS: JSON.stringify(d.usuarios), ADMIN_SESSION_SECRET: d.segredos[projeto] };
+  const daqui = d.usuarios.filter(pode).map(({ sites, ...u }) => u); // só quem tem acesso a ESTE site
+  if (!daqui.length) { console.error("Ninguém com acesso a este site. Rode 'adicionar' antes."); process.exit(1); }
+  console.log(`Publicando ${daqui.length} pessoa(s) em ${projeto}: ${daqui.map((u) => u.email).join(", ")}`);
+  const valores = { ADMIN_USERS: JSON.stringify(daqui), ADMIN_SESSION_SECRET: d.segredos[projeto] };
   for (const [nome, valor] of Object.entries(valores)) {
     await new Promise((ok, falha) => {
       // o valor vai pela entrada padrão: não aparece na tela nem no histórico do shell
