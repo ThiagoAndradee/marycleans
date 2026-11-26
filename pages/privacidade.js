@@ -1,7 +1,7 @@
 import Pagina from "../components/Pagina";
 import { EMPRESA } from "../lib/negocio";
 
-const ATUALIZADO = "26 de setembro de 2026";
+const ATUALIZADO = "26 de novembro de 2026";
 
 export default function Privacidade() {
   return (
@@ -90,11 +90,35 @@ export default function Privacidade() {
           </div>
 
           <div>
+            <h2 className="text-titulo-3">Estatísticas de visitas</h2>
+            <p className="mt-2 text-sm leading-6">
+              Para perceber que páginas ajudam quem procura uma limpeza, o site conta as visitas
+              com uma ferramenta própria, sem serviços de terceiros como o Google Analytics. Ela
+              regista: a página aberta, o site ou a pesquisa de onde veio (só o domínio, por
+              exemplo google.pt ou chatgpt.com) e os parâmetros de campanha utm, o tipo de
+              aparelho, navegador e sistema, o país e a cidade aproximada (deduzidos pelo nosso
+              alojamento e guardados sem o endereço IP), até onde desceu na página, quanto tempo
+              ficou nela, onde clicou (posição na página e se foi no WhatsApp, telefone, email
+              ou pedido de orçamento) e se enviou um formulário.
+            </p>
+            <p className="mt-3 text-sm leading-6">
+              Não guardamos o endereço IP, não usamos cookies nem guardamos nada no seu
+              aparelho, e não registamos o que escreve nos formulários. Para contar visitas sem
+              o identificar, usamos um código que muda todos os dias e não permite chegar a si
+              nem ligar visitas de dias diferentes. Os dados ficam numa base de dados da Upstash
+              (subcontratante, servidores na União Europeia) e são apagados automaticamente
+              após 13 meses. Fundamento: interesse legítimo em melhorar o site (artigo 6.º,
+              n.º 1, alínea f, do RGPD). Se o seu navegador enviar o sinal Global Privacy
+              Control, não contamos a sua visita.
+            </p>
+          </div>
+
+          <div>
             <h2 className="text-titulo-3">Cookies</h2>
             <p className="mt-2 text-sm leading-6">
-              Este site nao usa cookies de publicidade nem de perfilagem. Se forem introduzidas
-              ferramentas de medicao de trafego, esta pagina e atualizada antes disso e o
-              consentimento e pedido de forma separada.
+              Este site não usa cookies de publicidade, de perfilagem nem de medição. Se isso
+              mudar, esta página é atualizada antes e o consentimento é pedido de forma
+              separada.
             </p>
           </div>
         </div>

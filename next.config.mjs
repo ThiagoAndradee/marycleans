@@ -8,6 +8,9 @@ const nextConfig = {
   async redirects() {
     return [{ source: "/contato", destination: "/contacto", permanent: true }];
   },
+  async rewrites() {
+    return [{ source: "/admin/analytics", destination: "/api/analytics?op=page" }];
+  },
   async headers() {
     return [
       {
